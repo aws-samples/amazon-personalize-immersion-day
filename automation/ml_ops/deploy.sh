@@ -1,0 +1,48 @@
+#!/bin/bash
+sudo service docker start
+sudo usermod -a -G docker ec2-user
+docker ps
+pip install aws-sam-cli
+sam --version
+sam deploy --template-file template.yaml --stack-name id-ml-ops --capabilities CAPABILITY_IAM --s3-bucket $1
+bucket=$(aws cloudformation describe-stacks --stack-name id-ml-ops --query "Stacks[0].Outputs[?OutputKey=='InputBucketName'].OutputValue" --output text)
+if [ "$2" == "Retail" ]
+then 
+    echo "Starting the copy to S3 Retail data"
+    aws s3 cp s3://retail-demo-store-us-east-1/csvs/users.csv s3://$bucket/Users/users.csv
+    aws s3 cp s3://retail-demo-store-us-east-1/csvs/items.csv s3://$bucket/Items/items.csv
+    aws s3 cp s3://retail-demo-store-us-east-1/csvs/interactions.csv s3://$bucket/Interactions/interactions.csv
+    aws s3 cp ./domain/$2/params.json s3://$bucket 
+elif [ "$2" = "Media" ]
+then
+    echo "Starting the copy to S3 Media data"
+    aws s3 cp s3://personalization-at-amazon/personalize-immersion-day/Media/Items/items.csv s3://$bucket/Items/items.csv
+    aws s3 cp s3://personalization-at-amazon/personalize-immersion-day/Media/Interactions/interactions.csv s3://$bucket/Interactions/interactions.csv
+    aws s3 cp ./domain/$2/params.json s3://$bucket 
+elif [ "$2" = "CPG" ]
+then
+    echo "Starting the copy to S3 CPG data"
+    aws s3 cp s3://personalization-at-amazon/personalize-immersion-day/CPG/Items/items.csv s3://$bucket/Items/items.csv
+    aws s3 cp s3://personalization-at-amazon/personalize-immersion-day/CPG/Interactions/interactions.csv s3://$bucket/Interactions/interactions.csv
+    aws s3 cp s3://personalization-at-amazon/personalize-immersion-day/CPG/Users/users.csv s3://$bucket/Users/users.csv
+    aws s3 cp ./domain/$2/params.json s3://$bucket 
+fi
+
+echo "Local copy sync Retail"
+aws s3 cp s3://retail-demo-store-us-east-1/csvs/interactions.csv ./domain/Retail/data/Interactions/interactions.csv
+aws s3 cp s3://retail-demo-store-us-east-1/csvs/users.csv ./domain/Retail/data/Users/users.csv
+aws s3 cp s3://retail-demo-store-us-east-1/csvs/items.csv ./domain/Retail/data/Items/items.csv
+aws s3 cp s3://retail-demo-store-us-east-1/data/products.yaml ./domain/Retail/metadata/Items/products.yaml
+aws s3 cp s3://retail-demo-store-us-east-1/data/categories.yaml ./domain/Retail/metadata/Items/categories.yaml
+aws s3 cp s3://retail-demo-store-us-east-1/data/users.json.gz ./domain/Retail/metadata/Users/users.json.gz
+
+echo "Local copy sync CPG"
+aws s3 cp s3://personalization-at-amazon/personalize-immersion-day/CPG/Interactions/interactions.csv ./domain/CPG/data/Interactions/interactions.csv
+aws s3 cp s3://personalization-at-amazon/personalize-immersion-day/CPG/Items/items.csv ./domain/CPG/data/Items/items.csv
+aws s3 cp s3://personalization-at-amazon/personalize-immersion-day/CPG/Users/users.csv ./domain/CPG/data/Users/users.csv
+aws s3 cp s3://personalization-at-amazon/personalize-immersion-day/CPG/Metadata/users-origin.csv ./domain/CPG/data/metadata/users-origin.csv
+aws s3 cp s3://personalization-at-amazon/personalize-immersion-day/CPG/Metadata/items-origin.csv ./domain/CPG/data/metadata/items-origin.csv
+
+echo "Local copy sync Media"
+aws s3 cp s3://personalization-at-amazon/personalize-immersion-day/Media/Interactions/interactions.csv ./domain/Media/data/Interactions/interactions.csv
+aws s3 cp s3://personalization-at-amazon/personalize-immersion-day/Media/Items/items.csv ./domain/Media/data/Items/items.csv
