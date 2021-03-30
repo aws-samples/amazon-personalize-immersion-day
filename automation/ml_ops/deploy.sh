@@ -44,7 +44,7 @@ then
 elif [ "$2" = "Media" ]
 then
     echo "Starting the copy to S3 Media data"
-    aws s3 cp ./domain/$2/data/Items/items-meta.csv s3://$bucket/Items/items.csv
+    aws s3 cp ./domain/$2/data/Items/item-meta.csv s3://$bucket/Items/items.csv
     aws s3 cp ./domain/$2/data/Interactions/interactions.csv s3://$bucket/Interactions/interactions.csv
     aws s3 cp ./domain/$2/params.json s3://$bucket 
 elif [ "$2" = "CPG" ]
