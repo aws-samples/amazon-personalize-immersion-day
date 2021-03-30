@@ -72,7 +72,7 @@ Resources:
                 #!/bin/bash
                 sudo -u ec2-user -i <<'EOF'
                 cd /home/ec2-user/SageMaker/
-                git clone https://github.com/luseloso/amazon-personalize-immersion-day.git
+                git clone https://github.com/aws-samples/amazon-personalize-immersion-day.git
                 cd /home/ec2-user/SageMaker/amazon-personalize-immersion-day/automation/ml_ops/
                 nohup sh deploy.sh "${SAMArtifactsBucket}" "${domain}" &
                 EOF
