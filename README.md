@@ -1,4 +1,4 @@
-# Personalize Immersion Day!!!!!
+# Personalize Immersion Day
 
 Amazon Personalize is a machine learning service that allows you to build and scale recommendation/personalization models in a quick and effective manner. The content below is designed to help you build out your first models for your given use case and makes assumptions that your data may not yet be in an ideal format for Amazon Personalize to use.
 
