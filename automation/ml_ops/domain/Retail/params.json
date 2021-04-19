@@ -88,10 +88,6 @@
       "sims":{
          "name":"simsSolution-APID-Retail-Automation",
          "recipeArn":"arn:aws:personalize:::recipe/aws-sims"
-      },
-      "personalizedRanking":{
-         "name":"personalizedRankingSolution-APID-Retail-Automation",
-         "recipeArn":"arn:aws:personalize:::recipe/aws-personalized-ranking"
       }
    },
    "eventTracker":{

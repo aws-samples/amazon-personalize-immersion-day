@@ -63,10 +63,6 @@
       "sims":{
          "name":"simsSolution",
          "recipeArn":"arn:aws:personalize:::recipe/aws-sims"
-      },
-      "personalizedRanking":{
-         "name":"personalizedRankingSolution",
-         "recipeArn":"arn:aws:personalize:::recipe/aws-personalized-ranking"
       }
    },
    "eventTracker":{
