@@ -76,6 +76,10 @@
       "userPersonalizationCampaign":{
          "name":"userPersonalizationCampaign",
          "minProvisionedTPS":1
+      },
+      "simsCampaign":{
+         "name":"simsCampaign",
+         "minProvisionedTPS":1
       }
    }
 }

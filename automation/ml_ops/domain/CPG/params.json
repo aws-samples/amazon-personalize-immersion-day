@@ -103,10 +103,6 @@
       "sims":{
          "name":"simsSolution",
          "recipeArn":"arn:aws:personalize:::recipe/aws-sims"
-      },
-      "personalizedRanking":{
-         "name":"personalizedRankingSolution",
-         "recipeArn":"arn:aws:personalize:::recipe/aws-personalized-ranking"
       }
    },
    "eventTracker":{
@@ -115,6 +111,10 @@
    "campaigns":{
       "userPersonalizationCampaign":{
          "name":"userPersonalizationCampaign",
+         "minProvisionedTPS":1
+      },
+      "simsCampaign":{
+         "name":"simsCampaign",
          "minProvisionedTPS":1
       }
    }

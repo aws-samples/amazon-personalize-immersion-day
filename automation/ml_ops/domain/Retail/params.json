@@ -101,6 +101,10 @@
       "userPersonalizationCampaign":{
          "name":"userPersonalizationCampaign-APID-Retail-Automation",
          "minProvisionedTPS":1
+      },
+      "simsCampaign":{
+         "name":"simsCampaign-APID-Retail-Automation",
+         "minProvisionedTPS":1
       }
    }
 }
