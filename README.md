@@ -53,10 +53,10 @@ Start by clicking `Next` at the bottom like this:
 
 On this page you have a few options:
 
-1. Change the Stack name to something relevant like `AmazonPersonalizeImmersionDay`.
-1. Change the Notebook Name (optional).
-1. Alter the VolumeSize for the SageMaker EBS volume, default is 64GB.
-1. Enter the industry domain you wish to use for the Immersion Day (Media, Retail, or CPG). Datasets and notebooks for the selected industry will be deployed in the SageMaker notebook instance.
+1. Enter a Stack name to something relevant like `AmazonPersonalizeImmersionDay`.
+1. Change the SageMaker notebook instance name (optional).
+1. Alter the SageMaker notebook EBS volume size, default is 64GB.
+1. Select the industry domain you wish to use for the Immersion Day (Media, Retail, or CPG). Datasets and notebooks for the selected industry will be deployed in the SageMaker notebook instance.
 
 When you are done click `Next` at the bottom.
 
@@ -75,7 +75,7 @@ For a few minutes CloudFormation will be creating the resources described above 
 
 ![StackWizard5](static/imgs/img5.png)
 
-Once it has completed you'll see green text like below indicating that the work has been completed:
+Once it has completed you'll see green text like below indicating that the deployment has completed:
 
 ![StackWizard5](static/imgs/img6.png)
 
@@ -88,7 +88,7 @@ From the SageMaker console, scroll until you see the green box indicating now ma
 
 ![StackWizard5](static/imgs/img8.png)
 
-On this page you will see a list of any SageMaker notebooks you have running, simply click the `Open JupyterLab` link on the Amazon Personalize Immersion Day notebook you have created
+On this page you will see a list of any SageMaker notebooks you have running, click the `Open JupyterLab` link on the Amazon Personalize Immersion Day notebook you have created.
 
 ![StackWizard5](static/imgs/img9.png)
 

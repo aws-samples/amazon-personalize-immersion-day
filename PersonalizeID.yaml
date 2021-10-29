@@ -3,11 +3,31 @@ AWSTemplateFormatVersion: '2010-09-09'
 
 Description: Creates an S3 Bucket, IAM Policies, and SageMaker Notebook needed for the Amazon Personalize Immersion Day.
 
+Metadata:
+  AWS::CloudFormation::Interface:
+    ParameterGroups:
+      - Label:
+          default: "SageMaker notebook instance"
+        Parameters:
+          - NotebookName
+          - VolumeSize
+      - Label:
+          default: "Industry"
+        Parameters:
+          - domain
+    ParameterLabels:
+      NotebookName:
+        default: "Instance name"
+      VolumeSize:
+        default: "Volume size"
+      domain:
+        default: "Industry domain"
+
 Parameters:
   NotebookName:
     Type: String
     Default: AmazonPersonalizeImmersionDay
-    Description: Enter the name of the SageMaker notebook instance. Default is PersonalizeImmersionDay.
+    Description: Enter the name of the SageMaker notebook instance. Default is AmazonPersonalizeImmersionDay.
 
   VolumeSize:
     Type: Number
@@ -15,12 +35,12 @@ Parameters:
     MinValue: 5
     MaxValue: 16384
     ConstraintDescription: Must be an integer between 5 (GB) and 16384 (16 TB).
-    Description: Enter the size of the EBS volume in GB.
+    Description: Enter the size of the SageMaker notebook instance EBS volume in GB.
 
   domain:
     Type: String
     Default: Media
-    Description: Enter the industry domain (Retail, Media, or CPG) you would like to use in your Amazon Personalize Immersion Day.
+    Description: Select the industry domain (Retail, Media, or CPG) to use for the Amazon Personalize Immersion Day.
     AllowedValues:
       - 'Retail'
       - 'Media'
