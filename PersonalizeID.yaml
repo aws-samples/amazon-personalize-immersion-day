@@ -1,13 +1,33 @@
 ---
 AWSTemplateFormatVersion: '2010-09-09'
 
-Description: Creates an S3 Bucket, IAM Policies, and SageMaker Notebook to work with Personalize.
+Description: Creates an S3 Bucket, IAM Policies, and SageMaker Notebook needed for the Amazon Personalize Immersion Day.
+
+Metadata:
+  AWS::CloudFormation::Interface:
+    ParameterGroups:
+      - Label:
+          default: "SageMaker notebook instance"
+        Parameters:
+          - NotebookName
+          - VolumeSize
+      - Label:
+          default: "Industry"
+        Parameters:
+          - domain
+    ParameterLabels:
+      NotebookName:
+        default: "Instance name"
+      VolumeSize:
+        default: "Volume size"
+      domain:
+        default: "Industry domain"
 
 Parameters:
   NotebookName:
     Type: String
-    Default: AmazonPersonalizeImmersionDay2
-    Description: Enter the name of the SageMaker notebook instance. Default is PersonalizeImmersionDay.
+    Default: AmazonPersonalizeImmersionDay
+    Description: Enter the name of the SageMaker notebook instance. Default is AmazonPersonalizeImmersionDay.
 
   VolumeSize:
     Type: Number
@@ -15,17 +35,21 @@ Parameters:
     MinValue: 5
     MaxValue: 16384
     ConstraintDescription: Must be an integer between 5 (GB) and 16384 (16 TB).
-    Description: Enter the size of the EBS volume in GB.
-    
+    Description: Enter the size of the SageMaker notebook instance EBS volume in GB.
+
   domain:
     Type: String
     Default: Media
-    Description: Enter the name of the domain (Retail, Media, or CPG) you would like to use in your Amazon Personalize Immersion Day.
-
+    Description: Select the industry domain (Retail, Media, or CPG) to use for the Amazon Personalize Immersion Day.
+    AllowedValues:
+      - 'Retail'
+      - 'Media'
+      - 'CPG'
 
 Resources:
   SAMArtifactsBucket:
     Type: AWS::S3::Bucket
+
   # SageMaker Execution Role
   SageMakerIamRole:
     Type: "AWS::IAM::Role"
@@ -48,26 +72,23 @@ Resources:
         - "arn:aws:iam::aws:policy/AWSLambda_FullAccess"
         - "arn:aws:iam::aws:policy/AmazonSNSFullAccess"
         - "arn:aws:iam::aws:policy/service-role/AmazonPersonalizeFullAccess"
-        
-        
 
   # SageMaker notebook
   NotebookInstance:
     Type: "AWS::SageMaker::NotebookInstance"
     Properties:
-      InstanceType: "ml.t2.medium"
+      InstanceType: "ml.t3.medium"
       NotebookInstanceName: !Ref NotebookName
       RoleArn: !GetAtt SageMakerIamRole.Arn
       VolumeSizeInGB: !Ref VolumeSize
       LifecycleConfigName: !GetAtt AmazonPersonalizeMLOpsLifecycleConfig.NotebookInstanceLifecycleConfigName
-
 
   AmazonPersonalizeMLOpsLifecycleConfig:
     Type: "AWS::SageMaker::NotebookInstanceLifecycleConfig"
     Properties:
       OnStart:
         - Content:
-            Fn::Base64: 
+            Fn::Base64:
               !Sub |
                 #!/bin/bash
                 sudo -u ec2-user -i <<'EOF'
