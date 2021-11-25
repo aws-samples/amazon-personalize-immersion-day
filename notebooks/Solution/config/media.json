@@ -1,0 +1,127 @@
+{
+  "datasetGroup": {
+    "serviceConfig": {
+      "name": "immersion_day_media"
+    },
+    "workflowConfig": {
+        "schedules": {
+            "import": "cron(0 0 ? * 1 *)"
+        }
+    }
+  },
+  "datasets": {
+    "interactions": {
+      "dataset": {
+        "serviceConfig": {
+          "name": "immersion_day_media_interactions"
+        }
+      },
+      "schema": {
+        "serviceConfig": {
+          "name": "immersion_day_media_interactions_schema",
+          "schema": {
+            "fields": [
+              {
+                "name": "USER_ID",
+                "type": "string"
+              },
+              {
+                "name": "ITEM_ID",
+                "type": "string"
+              },
+              {
+                "name": "EVENT_TYPE",
+                "type": "string"
+              },
+              {
+                "name": "TIMESTAMP",
+                "type": "long"
+              }
+            ],
+            "name": "Interactions",
+            "namespace": "com.amazonaws.personalize.schema",
+            "type": "record",
+            "version": "1.0"
+          }
+        }
+      }
+    },
+    "items": {
+      "dataset": {
+        "serviceConfig": {
+          "name": "immersion_day_media_items"
+        }
+      },
+      "schema": {
+        "serviceConfig": {
+          "name": "immersion_day_media_items_schema",
+          "schema": {
+            "fields": [
+              {
+                "name": "ITEM_ID",
+                "type": "string"
+              },
+              {
+                "categorical": true,
+                "name": "GENRE",
+                "type": "string"
+              },
+              {
+                "name": "YEAR",
+                "type": "int"
+              }
+            ],
+            "name": "Items",
+            "namespace": "com.amazonaws.personalize.schema",
+            "type": "record",
+            "version": "1.0"
+          }
+        }
+      }
+    }
+  },
+  "solutions": [
+    {
+      "serviceConfig": {
+        "name": "immersion_media_user_personalization",
+        "recipeArn": "arn:aws:personalize:::recipe/aws-user-personalization"
+      },
+      "campaigns": [
+        {
+          "serviceConfig": {
+            "name": "immersion_media_user_personalization_campaign",
+            "minProvisionedTPS": 1
+          }
+        }
+      ]
+    },
+    {
+      "serviceConfig": {
+        "name": "immersion_media_personalized-ranking",
+        "recipeArn": "arn:aws:personalize:::recipe/aws-personalized-ranking"
+      },
+      "campaigns": [
+        {
+          "serviceConfig": {
+            "name": "immersion_media_personalized_ranking_campaign",
+            "minProvisionedTPS": 1
+          }
+        }
+      ]
+    },
+    {
+      "serviceConfig": {
+        "name": "immersion_media_sims",
+        "recipeArn": "arn:aws:personalize:::recipe/aws-sims"
+      },
+      "campaigns": [
+        {
+          "serviceConfig": {
+            "name": "immersion_media_sims_campaign",
+            "minProvisionedTPS": 1
+          }
+        }
+      ]
+    }
+  ]
+}
