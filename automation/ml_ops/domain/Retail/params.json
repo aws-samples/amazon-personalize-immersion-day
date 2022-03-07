@@ -9,23 +9,23 @@
                 "type":"record",
                 "name":"Interactions",
                 "namespace":"com.amazonaws.personalize.schema",
-                "fields":[
-                    {
-                       "name":"USER_ID",
-                       "type":"string"
-                    },
-                    {
-                       "name":"ITEM_ID",
-                       "type":"string"
-                    },
-                    {
-                       "name":"EVENT_TYPE",
-                       "type":"string"
-                    },
-                    {
-                       "name":"TIMESTAMP",
-                       "type":"long"
-                    }
+                "fields": [
+                     {
+                        "name": "ITEM_ID",
+                        "type": "string"
+                     },
+                     {
+                        "name": "USER_ID",
+                        "type": "string"
+                     },
+                     {
+                        "name": "EVENT_TYPE",
+                        "type": "string"
+                     },
+                     {
+                        "name": "TIMESTAMP",
+                        "type": "long"
+                     }
                 ],
                 "version":"1.0"
           }
@@ -36,21 +36,35 @@
             "type":"record",
             "name":"Items",
             "namespace":"com.amazonaws.personalize.schema",
-            "fields":[
-                {
-                   "name":"ITEM_ID",
-                   "type":"string"
-                },
-                {
-                   "name":"CATEGORY",
-                   "type":"string",
-                   "categorical":true
-                },
-                {
-                   "name":"STYLE",
-                   "type":"string",
-                   "categorical":true
-                }
+            "fields": [
+               {
+                   "name": "ITEM_ID",
+                   "type": "string"
+               },
+               {
+                   "name": "PRICE",
+                   "type": "float"
+               },
+               {
+                   "name": "CATEGORY_L1",
+                   "type": "string",
+                   "categorical": "true"
+               },
+               {
+                   "name": "CATEGORY_L2",
+                   "type": "string",
+                   "categorical": "true"
+               },
+               {
+                   "name": "PRODUCT_DESCRIPTION",
+                   "type": "string",
+                   "textual": "true"
+               },
+               {
+                   "name": "GENDER",
+                   "type": "string",
+                   "categorical": "true"
+               }
             ],
             "version":"1.0"
           }
