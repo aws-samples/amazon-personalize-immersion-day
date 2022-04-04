@@ -2,3 +2,5 @@
 __pycache__/
 .vscode
 .DS_Store
+.aws-sam
+samconfig.toml

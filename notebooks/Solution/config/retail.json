@@ -1,0 +1,133 @@
+{
+  "datasetGroup": {
+    "serviceConfig": {
+      "name": "immersion_day_retail"
+    },
+    "workflowConfig": {
+        "schedules": {
+            "import": "cron(0 0 ? * 1 *)"
+        }
+    }
+  },
+  "datasets": {
+    "interactions": {
+      "dataset": {
+        "serviceConfig": {
+          "name": "immersion_day_retail_interactions"
+        }
+      },
+      "schema": {
+        "serviceConfig": {
+          "name": "immersion_day_retail_interactions_schema",
+          "schema": {
+            "type": "record",
+            "name": "Interactions",
+            "namespace": "com.amazonaws.personalize.schema",
+            "fields": [
+              {
+                "name": "USER_ID",
+                "type": "string"
+              },
+              {
+                "name": "ITEM_ID",
+                "type": "string"
+              },
+              {
+                "name": "EVENT_TYPE",
+                "type": "string"
+              },
+              {
+                "name": "TIMESTAMP",
+                "type": "long"
+              }
+            ],
+            "version": "1.0"
+          }
+        }
+      }
+    },
+    "items": {
+      "dataset": {
+        "serviceConfig": {
+          "name": "immersion_day_retail_items"
+        }
+      },
+      "schema": {
+        "serviceConfig": {
+          "name": "immersion_day_retail_items_schema",
+          "schema": {
+            "type": "record",
+            "name": "Items",
+            "namespace": "com.amazonaws.personalize.schema",
+            "fields": [
+              {
+                "name": "ITEM_ID",
+                "type": "string"
+              },
+              {
+                "name": "CATEGORY",
+                "type": "string",
+                "categorical": true
+              },
+              {
+                "name": "STYLE",
+                "type": "string",
+                "categorical": true
+              }
+            ],
+            "version": "1.0"
+          }
+        }
+      }
+    },
+    "users": {
+      "dataset": {
+        "serviceConfig": {
+          "name": "immersion_day_retail_users"
+        }
+      },
+      "schema": {
+        "serviceConfig": {
+          "name": "immersion_day_retail_users_schema",
+          "schema": {
+            "type": "record",
+            "name": "Users",
+            "namespace": "com.amazonaws.personalize.schema",
+            "fields": [
+              {
+                "name": "USER_ID",
+                "type": "string"
+              },
+              {
+                "name": "AGE",
+                "type": "int"
+              },
+              {
+                "name": "GENDER",
+                "type": "string",
+                "categorical": true
+              }
+            ],
+            "version": "1.0"
+          }
+        }
+      }
+    }
+  },
+  "solutions": [
+    {
+      "serviceConfig": {
+        "name": "immersion_retail_sims",
+        "recipeArn": "arn:aws:personalize:::recipe/aws-sims"
+      },
+      "campaigns": [
+        {
+          "serviceConfig": {
+            "name": "immersion_retail_sims_campaign",
+            "minProvisionedTPS": 1
+          }
+        }
+      ]
+    }
+  ]
+}

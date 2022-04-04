@@ -72,6 +72,16 @@ Resources:
         - "arn:aws:iam::aws:policy/AWSLambda_FullAccess"
         - "arn:aws:iam::aws:policy/AmazonSNSFullAccess"
         - "arn:aws:iam::aws:policy/service-role/AmazonPersonalizeFullAccess"
+        - "arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess"
+        - "arn:aws:iam::aws:policy/CloudWatchFullAccess"
+      Policies:
+        - PolicyName: EventBridgeAccess
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action: "events:*"
+                Resource: "*"
 
   # SageMaker notebook
   NotebookInstance:
@@ -82,10 +92,27 @@ Resources:
       RoleArn: !GetAtt SageMakerIamRole.Arn
       VolumeSizeInGB: !Ref VolumeSize
       LifecycleConfigName: !GetAtt AmazonPersonalizeMLOpsLifecycleConfig.NotebookInstanceLifecycleConfigName
+      PlatformIdentifier: notebook-al2-v1
 
   AmazonPersonalizeMLOpsLifecycleConfig:
     Type: "AWS::SageMaker::NotebookInstanceLifecycleConfig"
     Properties:
+      OnCreate:
+        - Content:
+            Fn::Base64:
+              !Sub |
+                #!/bin/bash
+                sudo -u ec2-user -i <<'EOF'
+                source /home/ec2-user/anaconda3/bin/activate JupyterSystemEnv
+                jupyter labextension install @jupyter-widgets/jupyterlab-manager
+                source /home/ec2-user/anaconda3/bin/deactivate
+                git clone https://github.com/aws-solutions/maintaining-personalized-experiences-with-machine-learning.git
+                cd maintaining-personalized-experiences-with-machine-learning/source
+                source /home/ec2-user/anaconda3/bin/activate "mxnet_latest_p37"
+                pip install cdk_solution_helper_py/helpers_common
+                pip install scheduler/common
+                source /home/ec2-user/anaconda3/bin/deactivate
+                EOF
       OnStart:
         - Content:
             Fn::Base64:
