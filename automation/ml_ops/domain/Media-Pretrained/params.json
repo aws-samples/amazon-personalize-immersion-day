@@ -1,0 +1,146 @@
+{
+  "datasetGroup": {
+    "serviceConfig": {
+      "name": "customer_2_datasetgroup",
+      "domain": "VIDEO_ON_DEMAND"
+    }
+  },
+  "datasets": {
+    "interactions": {
+      "dataset": {
+        "serviceConfig": {
+          "name": "customer_2_interactions"
+        }
+      },
+      "schema": {
+        "serviceConfig": {
+          "name": "customer_2_interactions_schema",
+          "domain": "VIDEO_ON_DEMAND",
+          "schema": {
+            "type": "record",
+            "name": "interactions",
+            "namespace": "com.amazonaws.personalize.schema",
+            "fields": [
+              {
+                "name": "USER_ID",
+                "type": "string"
+              },
+              {
+                "name": "ITEM_ID",
+                "type": "string"
+              },
+              {
+                "name": "EVENT_TYPE",
+                "type": "string"
+              },
+              {
+                "name": "TIMESTAMP",
+                "type": "long"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "users": {
+      "dataset": {
+        "serviceConfig": {
+          "name": "customer_2_users"
+        }
+      },
+      "schema": {
+        "serviceConfig": {
+          "name": "customer_2_users_schema",
+          "domain": "VIDEO_ON_DEMAND",
+          "schema": {
+            "type": "record",
+            "name": "users",
+            "namespace": "com.amazonaws.personalize.schema",
+            "fields": [
+              {
+                "name": "USER_ID",
+                "type": "string"
+              },
+              {
+                "name": "MEMBERLEVEL",
+                "type": "string",
+                "categorical": true
+              }
+            ]
+          }
+        }
+      }
+    },
+    "items": {
+      "dataset": {
+        "serviceConfig": {
+          "name": "customer_2_items"
+        }
+      },
+      "schema": {
+        "serviceConfig": {
+          "name": "customer_2_items",
+          "domain": "VIDEO_ON_DEMAND",
+          "schema": {
+            "type": "record",
+            "name": "items",
+            "namespace": "com.amazonaws.personalize.schema",
+            "fields": [
+              {
+                "name": "ITEM_ID",
+                "type": "string"
+              },
+              {
+                "name": "TITLE",
+                "type": "string"
+              },
+              {
+                "name": "YEAR",
+                "type": "int"
+              },
+              {
+                "name": "IMDB_RATING",
+                "type": "int"
+              },
+              {
+                "name": "IMDB_NUMBEROFVOTES",
+                "type": "int"
+              },
+              {
+                "name": "PLOT",
+                "type": "string",
+                "textual": true
+              },
+              {
+                "name": "US_MATURITY_RATING_STRING",
+                "type": "string"
+              },
+              {
+                "name": "US_MATURITY_RATING",
+                "type": "int"
+              },
+              {
+                "name": "GENRES",
+                "type": "string",
+                "categorical": true
+              },
+              {
+                "name": "CREATION_TIMESTAMP",
+                "type": "long"
+              },
+              {
+                "name": "PROMOTION",
+                "type": "string"
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "eventTracker": {
+    "serviceConfig": {
+      "name": "customer_2_event_tracker"
+    }
+  }
+}
