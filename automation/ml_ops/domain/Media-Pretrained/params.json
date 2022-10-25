@@ -1,7 +1,7 @@
 {
   "datasetGroup": {
     "serviceConfig": {
-      "name": "customer_2_datasetgroup",
+      "name": "personalize-poc-movielens",
       "domain": "VIDEO_ON_DEMAND"
     }
   },
@@ -9,12 +9,12 @@
     "interactions": {
       "dataset": {
         "serviceConfig": {
-          "name": "customer_2_interactions"
+          "name": "workshop_movielens_interactions"
         }
       },
       "schema": {
         "serviceConfig": {
-          "name": "customer_2_interactions_schema",
+          "name": "workshop_movielens_interactions_schema",
           "domain": "VIDEO_ON_DEMAND",
           "schema": {
             "type": "record",
@@ -45,12 +45,12 @@
     "users": {
       "dataset": {
         "serviceConfig": {
-          "name": "customer_2_users"
+          "name": "workshop_movielens_users"
         }
       },
       "schema": {
         "serviceConfig": {
-          "name": "customer_2_users_schema",
+          "name": "workshop_movielens_users_schema",
           "domain": "VIDEO_ON_DEMAND",
           "schema": {
             "type": "record",
@@ -74,12 +74,12 @@
     "items": {
       "dataset": {
         "serviceConfig": {
-          "name": "customer_2_items"
+          "name": "workshop_movielens_items"
         }
       },
       "schema": {
         "serviceConfig": {
-          "name": "customer_2_items",
+          "name": "workshop_movielens_items_schema",
           "domain": "VIDEO_ON_DEMAND",
           "schema": {
             "type": "record",
@@ -138,9 +138,34 @@
       }
     }
   },
-  "eventTracker": {
-    "serviceConfig": {
-      "name": "customer_2_event_tracker"
+  "recommenders": [
+    {
+      "serviceConfig": {
+        "name": "workshop_more_like_x",
+        "recipeArn": "arn:aws:personalize:::recipe/aws-vod-more-like-x"
+      }
+    },
+    {
+      "serviceConfig": {
+        "name": "workshop_top_picks_for_you",
+        "recipeArn": "arn:aws:personalize:::recipe/aws-vod-top-picks"
+      }
     }
-  }
+  ],
+  "solutions": [
+    {
+      "serviceConfig": {
+        "name": "workshop_user_persoanlization",
+        "recipeArn": "arn:aws:personalize:::recipe/aws-user-personalization"
+      },
+      "campaigns": [
+        {
+          "serviceConfig": {
+            "name": "workshop_user_persoanlization_campaign",
+            "minProvisionedTPS": 1
+          }
+        }
+      ]
+    }
+  ]
 }
