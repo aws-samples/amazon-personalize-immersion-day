@@ -155,13 +155,13 @@
   "solutions": [
     {
       "serviceConfig": {
-        "name": "workshop_user_persoanlization",
-        "recipeArn": "arn:aws:personalize:::recipe/aws-user-personalization"
+        "name": "workshop_persoanlized_ranking",
+        "recipeArn": "arn:aws:personalize:::recipe/aws-personalized-ranking"
       },
       "campaigns": [
         {
           "serviceConfig": {
-            "name": "workshop_user_persoanlization_campaign",
+            "name": "workshop_persoanlized_ranking_campaign",
             "minProvisionedTPS": 1
           }
         }
