@@ -39,7 +39,6 @@ unzip ml-latest-small.zip
 
 echo "Local copy sync Media-Pretrained"
 mkdir imdb
-echo "IMDB"
 cd ..
 aws s3 cp s3://aim312data/items.csv poc_data/imdb/items.csv
 mkdir domain/Media-Pretrained/data/
@@ -55,7 +54,6 @@ pwd
 if [ "$2" == "Media-Pretrained" ]
 then
     echo "Preprocess the IMDB and Movielens data"
-
     python script-Pretrained.py >script-Pretrained.out 2>&1
     
 else
