@@ -38,7 +38,8 @@ wget http://files.grouplens.org/datasets/movielens/ml-latest-small.zip
 unzip ml-latest-small.zip
 
 echo "Local copy sync Media-Pretrained"
-mkdir poc_data/imdb
+mkdir imdb
+cd ..
 aws s3 cp s3://aim312data/items.csv poc_data/imdb/items.csv
 mkdir domain/Media-Pretrained/data/
 mkdir domain/Media-Pretrained/data/Interactions/
@@ -49,7 +50,6 @@ aws s3 cp s3://aim312data/users.csv domain/Media-Pretrained/data/Users/
 
 # Movie Lens data is imported into poc_data for the Media above
 
-cd ..
 pwd
 if [ "$2" == "Media-Pretrained" ]
 then
