@@ -40,6 +40,7 @@ unzip ml-latest-small.zip
 
 echo "Local copy sync Media-Pretrained"
 mkdir imdb
+
 echo "IMDB data setup"
 cd ..
 aws s3 cp s3://aim312data/items.csv poc_data/imdb/items.csv
