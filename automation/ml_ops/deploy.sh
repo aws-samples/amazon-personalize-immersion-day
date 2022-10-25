@@ -4,7 +4,13 @@ sudo usermod -a -G docker ec2-user
 docker ps
 pip install aws-sam-cli
 sam --version
-sam deploy --template-file template.yaml --stack-name id-ml-ops --capabilities CAPABILITY_IAM --s3-bucket $1
+if [ "$2" == "Media-Pretrained" ]
+then
+    sam deploy --template-file template_v1_2_0.template --stack-name id-ml-ops --capabilities CAPABILITY_IAM --s3-bucket $1
+else
+    sam deploy --template-file template.yaml --stack-name id-ml-ops --capabilities CAPABILITY_IAM --s3-bucket $1
+fi
+
 bucket=$(aws cloudformation describe-stacks --stack-name id-ml-ops --query "Stacks[0].Outputs[?OutputKey=='InputBucketName'].OutputValue" --output text)
 echo "Local copy sync Retail"
 aws s3 cp s3://retail-demo-store-us-east-1/csvs/interactions.csv ./domain/Retail/data/Interactions/interactions.csv
@@ -22,6 +28,7 @@ aws s3 cp s3://personalization-at-amazon/personalize-immersion-day/CPG/Metadata/
 aws s3 cp s3://personalization-at-amazon/personalize-immersion-day/CPG/Metadata/items-origin.csv ./domain/CPG/data/metadata/items-origin.csv
 
 echo "Local copy sync Media"
+
 mkdir poc_data
 mkdir domain/Media/data/
 mkdir domain/Media/data/Interactions/
@@ -29,8 +36,21 @@ mkdir domain/Media/data/Items/
 cd poc_data 
 wget http://files.grouplens.org/datasets/movielens/ml-latest-small.zip
 unzip ml-latest-small.zip
+
+echo "Local copy sync Media-Pretrained"
+mkdir poc_data/imdb
+!aws s3 cp s3://aim312data/items.csv ./poc_data/imdb/items.csv
+
 cd ..
-python script.py
+pwd
+if [ "$2" == "Media-Pretrained" ]
+then
+    echo "Preprocess the IMDB and Movielens data"
+    python script-Pretrained.py
+else
+    echo "Preprocess the Movielens data"
+    python script.py
+fi
 
 sleep 60
 
@@ -54,5 +74,10 @@ then
     aws s3 cp s3://personalization-at-amazon/personalize-immersion-day/CPG/Interactions/interactions.csv s3://$bucket/Interactions/interactions.csv
     aws s3 cp s3://personalization-at-amazon/personalize-immersion-day/CPG/Users/users.csv s3://$bucket/Users/users.csv
     aws s3 cp ./domain/$2/params.json s3://$bucket 
+elif [ "$2" = "Media-Pretrained" ]
+then
+    aws s3 cp s3://aim312data/items.csv s3://$bucket/Items/items.csv
+    echo "Starting the copy to S3 Media data"
+    aws s3 cp ./domain/$2/data/Interactions/interactions.csv s3://$bucket/Interactions/interactions.csv
+    aws s3 cp ./domain/$2/params.json s3://$bucket 
 fi
-
