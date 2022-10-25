@@ -11,7 +11,8 @@ else
     sam deploy --template-file template.yaml --stack-name id-ml-ops --capabilities CAPABILITY_IAM --s3-bucket $1
 fi
 
-bucket=$(aws cloudformation describe-stacks --stack-name id-ml-ops --query "Stacks[0].Outputs[?OutputKey=='InputBucketName'].OutputValue" --output text)
+bucket=$(aws cloudformation describe-stacks --stack-name id-ml-ops --query "Stacks[0].Outputs[?OutputKey=='PersonalizeBucketName'].OutputValue" --output text)
+echo "Bucket is $bucket"
 echo "Local copy sync Retail"
 aws s3 cp s3://retail-demo-store-us-east-1/csvs/interactions.csv ./domain/Retail/data/Interactions/interactions.csv
 aws s3 cp s3://retail-demo-store-us-east-1/csvs/users.csv ./domain/Retail/data/Users/users.csv
@@ -39,7 +40,7 @@ unzip ml-latest-small.zip
 
 echo "Local copy sync Media-Pretrained"
 mkdir imdb
-echo "IMDB"
+echo "IMDB data setup"
 cd ..
 aws s3 cp s3://aim312data/items.csv poc_data/imdb/items.csv
 mkdir domain/Media-Pretrained/data/
