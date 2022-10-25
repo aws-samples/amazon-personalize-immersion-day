@@ -28,19 +28,11 @@ aws s3 cp s3://personalization-at-amazon/personalize-immersion-day/CPG/Metadata/
 aws s3 cp s3://personalization-at-amazon/personalize-immersion-day/CPG/Metadata/items-origin.csv ./domain/CPG/data/metadata/items-origin.csv
 
 echo "Local copy sync Media"
+echo "Local copy sync Media-Pretrained"
 mkdir poc_data
 mkdir domain/Media/data/
 mkdir domain/Media/data/Interactions/
 mkdir domain/Media/data/Items/
-cd poc_data 
-wget http://files.grouplens.org/datasets/movielens/ml-latest-small.zip
-unzip ml-latest-small.zip
-
-echo "Local copy sync Media-Pretrained"
-mkdir poc_data
-mkdir domain/Media-Pretrained/data/
-mkdir domain/Media-Pretrained/data/Interactions/
-mkdir domain/Media-Pretrained/data/Items/
 cd poc_data 
 wget http://files.grouplens.org/datasets/movielens/ml-latest-small.zip
 unzip ml-latest-small.zip
