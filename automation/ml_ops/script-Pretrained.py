@@ -43,7 +43,8 @@ interactions_df.rename(columns={'userId': 'USER_ID', 'imdbId': 'ITEM_ID',
 
 # We'll be using a subset of the IMDB dataset for this workshop that has been cleaned to remove movies that don't have valid values for the metadata we are using in out ITEMs dataset (we'll work with this more in the net section), so we'll need to make sure we don't have any interactions that have IMDB movie ids that are not in our subset of the IMDB data set.
 
-movies = pd.read_csv(data_dir + '/imdbmeta' + '/imdb_items.csv', sep=',', usecols=[
+imdb_dataset_dir = data_dir + "/imdb/"
+movies = pd.read_csv(imdb_dataset_dir + '/items.csv', sep=',', usecols=[
                      0, 1], encoding='latin-1', dtype={'movieId': "str", 'imdbId': "str", 'tmdbId': "str"})
 pd.set_option('display.max_rows', 25)
 
@@ -66,7 +67,7 @@ interactions_df.to_csv((data_dir+"/"+interactions_filename),
                        index=False, float_format='%.0f')
 
 original_data = pd.read_csv(
-    data_dir + '/imdbmeta/imdb_items.csv', sep=',', dtype={'PROMOTION': "string"})
+    imdb_dataset_dir + '/items.csv', sep=',', dtype={'PROMOTION': "string"})
 
 
 items_filename = "items.csv"

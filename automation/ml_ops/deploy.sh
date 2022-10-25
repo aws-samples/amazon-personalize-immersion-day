@@ -28,7 +28,7 @@ aws s3 cp s3://personalization-at-amazon/personalize-immersion-day/CPG/Metadata/
 aws s3 cp s3://personalization-at-amazon/personalize-immersion-day/CPG/Metadata/items-origin.csv ./domain/CPG/data/metadata/items-origin.csv
 
 echo "Local copy sync Media"
-echo "Local copy sync Media-Pretrained"
+
 mkdir poc_data
 mkdir domain/Media/data/
 mkdir domain/Media/data/Interactions/
@@ -37,12 +37,18 @@ cd poc_data
 wget http://files.grouplens.org/datasets/movielens/ml-latest-small.zip
 unzip ml-latest-small.zip
 
+echo "Local copy sync Media-Pretrained"
+mkdir poc_data/imdb
+!aws s3 cp s3://aim312data/items.csv ./poc_data/imdb/items.csv
+
 cd ..
+pwd
 if [ "$2" == "Media-Pretrained" ]
 then
-    echo "Preprocess the IMDB data"
+    echo "Preprocess the IMDB and Movielens data"
     python script-Pretrained.py
 else
+    echo "Preprocess the Movielens data"
     python script.py
 fi
 
@@ -70,7 +76,7 @@ then
     aws s3 cp ./domain/$2/params.json s3://$bucket 
 elif [ "$2" = "Media-Pretrained" ]
 then
-    s3://aim312data/items.csv s3://$bucket/Items/items.csv
+    aws s3 cp s3://aim312data/items.csv s3://$bucket/Items/items.csv
     echo "Starting the copy to S3 Media data"
     aws s3 cp ./domain/$2/data/Interactions/interactions.csv s3://$bucket/Interactions/interactions.csv
     aws s3 cp ./domain/$2/params.json s3://$bucket 
