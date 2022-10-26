@@ -43,13 +43,13 @@ mkdir imdb
 
 echo "IMDB data setup"
 cd ..
-aws s3 cp s3://aim312data/items.csv poc_data/imdb/items.csv
+aws s3 cp s3://elementalrodeo99-us-west-1/aim312/items.csv poc_data/imdb/items.csv
 mkdir domain/Media-Pretrained/data/
 mkdir domain/Media-Pretrained/data/Interactions/
 mkdir domain/Media-Pretrained/data/Items/
 mkdir domain/Media-Pretrained/data/Users/
-aws s3 cp s3://aim312data/items.csv domain/Media-Pretrained/data/Items/
-aws s3 cp s3://aim312data/users.csv domain/Media-Pretrained/data/Users/
+aws s3 cp s3://elementalrodeo99-us-west-1/aim312/items.csv domain/Media-Pretrained/data/Items/
+aws s3 cp s3://elementalrodeo99-us-west-1/aim312/users.csv domain/Media-Pretrained/data/Users/
 
 # Movie Lens data is imported into poc_data for the Media above
 
