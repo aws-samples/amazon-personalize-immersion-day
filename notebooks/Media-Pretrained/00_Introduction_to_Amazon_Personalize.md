@@ -38,16 +38,22 @@ You start by providing data about your users and items to Personalize; the data 
 
 (a) The activity of your users, also known as events or behavioral interaction data. Examples include items your users are clicking on, browsing, reading, watching, or purchasing. This dataset has the strongest signal for our machine learning algorithms and is the only one mandatory for Amazon Personalize.
 
-(b) The second kind of dataset, item metadata, includes details about your items, such as category, size, genre, description, or brand…essentially the information already in your item catalog. This dataset is optional but very useful for scenarios such as coldstart, when we want to make recommendations on new items.
+(b) The second kind of dataset, item metadata, includes details about your items, such as category, size, genre, description, or brand. This is the information already in your item catalog. This dataset is optional but very useful for scenarios such as coldstart, when we want to make recommendations on new items.
 
 (c) The third dataset, user metadata, includes details about your customers, often demographics, like their location, age, or subscription tier. Now once you have the data into the Service you can, in just a few clicks, get a custom, private personalization model trained and hosted for you. You can then retrieve those personalized recommendations for your users through a private API.
 
+After uploading your data you can use Amazon Personalize to train Use Case Optimized Recommenders of Custom Recommendations Solutions that match your use case. 
+
+Finally after the recommenders and solutions aretrained, you can then get recommendations using an API call and aply filters to further allign the recommendations with your business objectives.
+
+The content in this workshop is designed to help you build out your first models for your given use case. Now lets head to the first notebook [01_Data_Layer.ipynb](./01_Data_Layer.ipynb)
 
 ## Additional resources
+
+You can also have a look at the following additional resources:
 
 * [Product Page](https://aws.amazon.com/personalize/)
 * [GitHub Sample Notebooks](https://github.com/aws-samples/amazon-personalize-samples)
 * [Product Documentation](https://docs.aws.amazon.com/personalize/latest/dg/what-is-personalize.html)
 
 
-The content in the Notebooks is designed to help you build out your first models for your given use case. Now lets head to the first notebook [01_Data_Layer.ipynb](./01_Data_Layer.ipynb)
