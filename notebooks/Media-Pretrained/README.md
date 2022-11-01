@@ -17,8 +17,12 @@ UnicornFlix prides itself on being data driven, so you will need to develop a sy
 In this workshop, we will add personalized recommendations to the UnicornFlix SVOD website. The workshop is split into the following sections:
 
 [Get to know Amazon Personalize](./00_Introduction_to_Amazon_Personalize.md)
+
 [All you need is Data]()
+
 [Ready... Set... Train!]()
+
 [Let's take a look at our recommendations]()
+
 [Customize your recommendations with Business rules]()
 
