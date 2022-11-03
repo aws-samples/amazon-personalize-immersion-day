@@ -44,7 +44,7 @@ You start by providing data about your users and items to Personalize; the data 
 
 After uploading your data you can use Amazon Personalize to train Use Case Optimized Recommenders of Custom Recommendations Solutions that match your use case. 
 
-Finally after the recommenders and solutions aretrained, you can then get recommendations using an API call and aply filters to further allign the recommendations with your business objectives.
+Finally after the recommenders and solutions are trained, you can then get recommendations using an API call and apply filters to further align the recommendations with your business objectives.
 
 The content in this workshop is designed to help you build out your first models for your given use case. Now lets head to the first notebook [01_Data_Layer.ipynb](./01_Data_Layer.ipynb)
 
