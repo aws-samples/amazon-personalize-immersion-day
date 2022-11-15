@@ -58,7 +58,7 @@ if [ "$2" == "Media-Pretrained" ]
 then
     echo "Preprocess the IMDB and Movielens data"
 
-    python script-Pretrained.py >script-Pretrained.out 2>&1
+    ipython script-Pretrained.py >script-Pretrained.out 2>&1
     
 else
     echo "Preprocess the Movielens data"
@@ -92,6 +92,6 @@ then
     echo "Starting the copy to S3 Media data"
     aws s3 cp ./poc_data/users.csv s3://$bucket/train/users.csv
     aws s3 cp ./poc_data/interactions.csv s3://$bucket/train/interactions.csv
-    aws s3 cp ./poc_data/items.csv s3://$bucket/train/items.csv
+    aws s3 cp ./poc_data/item-meta.csv s3://$bucket/train/items.csv
     aws s3 cp ./domain/$2/params.json s3://$bucket/train/params.json
 fi
