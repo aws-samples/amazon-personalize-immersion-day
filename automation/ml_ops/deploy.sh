@@ -1,17 +1,6 @@
 #!/bin/bash
-sudo service docker start
-sudo usermod -a -G docker ec2-user
-docker ps
-pip install aws-sam-cli
-sam --version
-if [ "$2" == "Media-Pretrained" ]
-then
-    sam deploy --template-file template_v1_2_0.template --stack-name id-ml-ops --capabilities CAPABILITY_IAM --s3-bucket $1
-else
-    sam deploy --template-file template.yaml --stack-name id-ml-ops --capabilities CAPABILITY_IAM --s3-bucket $1
-fi
 
-bucket=$(aws cloudformation describe-stacks --stack-name id-ml-ops --query "Stacks[0].Outputs[?OutputKey=='PersonalizeBucketName'].OutputValue" --output text)
+bucket=$1
 echo "Bucket is $bucket"
 echo "Local copy sync Retail"
 aws s3 cp s3://retail-demo-store-us-east-1/csvs/interactions.csv ./domain/Retail/data/Interactions/interactions.csv
