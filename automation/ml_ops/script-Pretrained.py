@@ -172,7 +172,7 @@ item_data.info()
 
 
 mask = item_data['PLOT'].str.contains('las vegas', case=False, na=False)
-item_data.at[mask, 'PROMOTION'] = 'true'
+item_data.loc[mask, 'PROMOTION'] = 'true'
 item_metadata = item_data
 item_data[mask]
 
