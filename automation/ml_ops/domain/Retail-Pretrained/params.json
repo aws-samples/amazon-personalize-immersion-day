@@ -1,0 +1,171 @@
+{
+  "datasetGroup": {
+    "serviceConfig": {
+      "name": "personalize-poc-retail",
+      "domain": "ECOMMERCE"
+    }
+  },
+  "datasets": {
+    "interactions": {
+      "dataset": {
+        "serviceConfig": {
+          "name": "workshop_retail_interactions"
+        }
+      },
+      "schema": {
+        "serviceConfig": {
+          "name": "workshop_retail_interactions_schema",
+          "domain": "ECOMMERCE",
+          "schema": {
+            "type": "record",
+            "name": "interactions",
+            "namespace": "com.amazonaws.personalize.schema",
+            "fields": [
+              {
+                "name": "ITEM_ID",
+                "type": "string"
+              },
+              {
+                "name": "USER_ID",
+                "type": "string"
+              },
+              {
+                "name": "EVENT_TYPE",  
+                "type": "string"
+              },
+              {
+                "name": "TIMESTAMP",
+                "type": "long"
+              },
+              {
+                "name": "DISCOUNT",  
+                "type": "string",
+                "categorical": true
+              }
+            ]
+          }
+        }
+      }
+    },
+    "users": {
+      "dataset": {
+        "serviceConfig": {
+          "name": "workshop_retail_users"
+        }
+      },
+      "schema": {
+        "serviceConfig": {
+          "name": "workshop_retail_users_schema",
+          "domain": "ECOMMERCE",
+          "schema": {
+            "type": "record",
+            "name": "users",
+            "namespace": "com.amazonaws.personalize.schema",
+            "fields": [
+              {
+                "name": "USER_ID",
+                "type": "string"
+              },
+              {
+                "name": "AGE",
+                "type": "int"
+              },
+              {
+                "name": "GENDER",
+                "type": "string",
+                "categorical": true
+              }
+            ]
+          }
+        }
+      }
+    },
+    "items": {
+      "dataset": {
+        "serviceConfig": {
+          "name": "workshop_retail_items"
+        }
+      },
+      "schema": {
+        "serviceConfig": {
+          "name": "workshop_retail_items_schema",
+          "domain": "ECOMMERCE",
+          "schema": {
+            "type": "record",
+            "name": "items",
+            "namespace": "com.amazonaws.personalize.schema",
+            "fields": [
+              {
+                "name": "ITEM_ID",
+                "type": "string"
+              },
+              {
+                "name": "PRICE",
+                "type": "float"
+              },
+              {
+                "name": "CATEGORY_L1",
+                "type": "string",
+                "categorical": true
+              },
+              {
+                "name": "CATEGORY_L2",
+                "type": "string",
+                "categorical": true
+              },
+              {
+                "name": "PRODUCT_DESCRIPTION",
+                "type": "string",
+                "textual": true
+              },
+              {
+                "name": "GENDER",
+                "type": "string",
+                "categorical": true
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "recommenders": [
+    {
+      "serviceConfig": {
+        "name": "workshop_viewed_x_also_viewed",
+        "recipeArn": "arn:aws:personalize:::recipe/aws-ecomm-customers-who-viewed-x-also-viewed"
+      }
+    },
+    {
+      "serviceConfig": {
+        "name": "workshop_recommended_for_you",
+        "recipeArn": "arn:aws:personalize:::recipe/aws-ecomm-recommended-for-you"
+      }
+    }
+  ],
+  "solutions": [
+    {
+      "serviceConfig": {
+
+        "name": "workshop_persoanlized_ranking",
+        "recipeArn": "arn:aws:personalize:::recipe/aws-personalized-ranking"
+      },
+      "campaigns": [
+        {
+          "serviceConfig": {
+
+            "name": "workshop_personalized_ranking_campaign",
+            "minProvisionedTPS": 1
+          }
+        }
+      ]
+    }
+  ],
+  "data_files": [
+    {
+      "interactions_file_path": "s3://retail-demo-store-us-east-1/csvs/interactions.csv",
+      "users_file_path": "s3://retail-demo-store-us-east-1/csvs/users.csv",
+      "items_filte_path": "s3://retail-demo-store-us-east-1/csvs/items.csv"
+    }
+  ]
+}
