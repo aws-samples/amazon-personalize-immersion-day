@@ -161,11 +161,11 @@
       ]
     }
   ],
-  "data_files": [
-    {
-      "interactions_file_path": "s3://retail-demo-store-us-east-1/csvs/interactions.csv",
-      "users_file_path": "s3://retail-demo-store-us-east-1/csvs/users.csv",
-      "items_filte_path": "s3://retail-demo-store-us-east-1/csvs/items.csv"
-    }
-  ]
+  "data_files": {
+    "interactions_file_path": "s3://retail-demo-store-us-east-1/csvs/interactions.csv",
+    "users_file_path": "s3://retail-demo-store-us-east-1/csvs/users.csv",
+    "items_file_path": "s3://retail-demo-store-us-east-1/csvs/items.csv",
+    "user_metadata_file_path": "s3://retail-demo-store-us-east-1/data/users.json.gz",
+    "item_metadata_file_path": "s3://retail-demo-store-us-east-1/data/products.yaml"
+  }
 }
