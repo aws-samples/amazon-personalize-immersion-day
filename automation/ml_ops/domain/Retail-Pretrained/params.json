@@ -147,7 +147,7 @@
     {
       "serviceConfig": {
 
-        "name": "workshop_persoanlized_ranking_retail",
+        "name": "workshop_personalized_ranking_retail",
         "recipeArn": "arn:aws:personalize:::recipe/aws-personalized-ranking"
       },
       "campaigns": [
