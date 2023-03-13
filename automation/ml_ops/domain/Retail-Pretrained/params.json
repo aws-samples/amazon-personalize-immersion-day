@@ -147,14 +147,14 @@
     {
       "serviceConfig": {
 
-        "name": "workshop_persoanlized_ranking",
+        "name": "workshop_persoanlized_ranking_retail",
         "recipeArn": "arn:aws:personalize:::recipe/aws-personalized-ranking"
       },
       "campaigns": [
         {
           "serviceConfig": {
 
-            "name": "workshop_personalized_ranking_campaign",
+            "name": "workshop_personalized_ranking_retail_campaign",
             "minProvisionedTPS": 1
           }
         }
