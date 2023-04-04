@@ -2,6 +2,7 @@
 
 bucket=$1
 echo "Bucket is $bucket"
+echo "Domain is $2"
 echo "Local copy sync Retail"
 aws s3 cp s3://retail-demo-store-us-east-1/csvs/interactions.csv ./domain/Retail/data/Interactions/interactions.csv
 aws s3 cp s3://retail-demo-store-us-east-1/csvs/users.csv ./domain/Retail/data/Users/users.csv
@@ -56,12 +57,12 @@ fi
 
 sleep 60
 
-if [ "$2" == "Retail" ]
+if [ "$2" == "Retail"]
 then 
     echo "Starting the copy to S3 Retail data"
-    aws s3 cp s3://retail-demo-store-us-east-1/csvs/users.csv s3://$bucket/Users/users.csv
-    aws s3 cp s3://retail-demo-store-us-east-1/csvs/items.csv s3://$bucket/Items/items.csv
-    aws s3 cp s3://retail-demo-store-us-east-1/csvs/interactions.csv s3://$bucket/Interactions/interactions.csv
+    aws s3 cp s3://retail-demo-store-us-east-1/csvs/users.csv s3://$bucket/train/users.csv
+    aws s3 cp s3://retail-demo-store-us-east-1/csvs/items.csv s3://$bucket/train/items.csv
+    aws s3 cp s3://retail-demo-store-us-east-1/csvs/interactions.csv s3://$bucket/train/interactions.csv
     aws s3 cp ./domain/$2/params.json s3://$bucket 
 elif [ "$2" = "Media" ]
 then
