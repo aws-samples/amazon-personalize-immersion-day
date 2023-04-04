@@ -57,13 +57,13 @@ fi
 
 sleep 60
 
-if [ "$2" == "Retail"]
+if [ "$2" == "Retail-Pretrained" ]
 then 
     echo "Starting the copy to S3 Retail data"
     aws s3 cp s3://retail-demo-store-us-east-1/csvs/users.csv s3://$bucket/train/users.csv
     aws s3 cp s3://retail-demo-store-us-east-1/csvs/items.csv s3://$bucket/train/items.csv
     aws s3 cp s3://retail-demo-store-us-east-1/csvs/interactions.csv s3://$bucket/train/interactions.csv
-    aws s3 cp ./domain/$2/params.json s3://$bucket 
+    aws s3 cp ./domain/$2/params.json s3://$bucket/train/params.json
 elif [ "$2" = "Media" ]
 then
     echo "Starting the copy to S3 Media data"
