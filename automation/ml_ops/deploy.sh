@@ -4,19 +4,12 @@ bucket=$1
 echo "Bucket is $bucket"
 echo "Domain is $2"
 echo "Local copy sync Retail"
-aws s3 cp s3://retail-demo-store-us-east-1/csvs/interactions.csv ./domain/Retail/data/Interactions/interactions.csv
-aws s3 cp s3://retail-demo-store-us-east-1/csvs/users.csv ./domain/Retail/data/Users/users.csv
-aws s3 cp s3://retail-demo-store-us-east-1/csvs/items.csv ./domain/Retail/data/Items/items.csv
-aws s3 cp s3://retail-demo-store-us-east-1/data/products.yaml ./domain/Retail/metadata/Items/products.yaml
-aws s3 cp s3://retail-demo-store-us-east-1/data/categories.yaml ./domain/Retail/metadata/Items/categories.yaml
-aws s3 cp s3://retail-demo-store-us-east-1/data/users.json.gz ./domain/Retail/metadata/Users/users.json.gz
-
-echo "Local copy sync CPG"
-aws s3 cp s3://personalization-at-amazon/personalize-immersion-day/CPG/Interactions/interactions.csv ./domain/CPG/data/Interactions/interactions.csv
-aws s3 cp s3://personalization-at-amazon/personalize-immersion-day/CPG/Items/items.csv ./domain/CPG/data/Items/items.csv
-aws s3 cp s3://personalization-at-amazon/personalize-immersion-day/CPG/Users/users.csv ./domain/CPG/data/Users/users.csv
-aws s3 cp s3://personalization-at-amazon/personalize-immersion-day/CPG/Metadata/users-origin.csv ./domain/CPG/data/metadata/users-origin.csv
-aws s3 cp s3://personalization-at-amazon/personalize-immersion-day/CPG/Metadata/items-origin.csv ./domain/CPG/data/metadata/items-origin.csv
+aws s3 cp s3://retail-demo-store-us-east-1/csvs/interactions.csv ./domain/Retail-Pretrained/data/Interactions/interactions.csv
+aws s3 cp s3://retail-demo-store-us-east-1/csvs/users.csv ./domain/Retail-Pretrained/data/Users/users.csv
+aws s3 cp s3://retail-demo-store-us-east-1/csvs/items.csv ./domain/Retail-Pretrained/data/Items/items.csv
+aws s3 cp s3://retail-demo-store-us-east-1/data/products.yaml ./domain/Retail-Pretrained/metadata/Items/products.yaml
+#aws s3 cp s3://retail-demo-store-us-east-1/data/categories.yaml ./domain/Retail-Pretrained/metadata/Items/categories.yaml
+aws s3 cp s3://retail-demo-store-us-east-1/data/users.json.gz ./domain/Retail-Pretrained/metadata/Users/users.json.gz
 
 echo "Local copy sync Media"
 
