@@ -335,7 +335,7 @@ clicked_df.head()
 
 
 interactions_df = clicked_df.copy()
-interactions_df = interactions_df.append(watched_df)
+interactions_df = pd.concat([interactions_df, watched_df])
 interactions_df.sort_values("timestamp", axis=0, ascending=True,
                             inplace=True, na_position='last')
 
