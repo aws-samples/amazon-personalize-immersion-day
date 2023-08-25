@@ -339,7 +339,6 @@ interactions_df = pd.concat([interactions_df, watched_df])
 interactions_df.sort_values("timestamp", axis=0, ascending=True,
                             inplace=True, na_position='last')
 
-
 # Lets look at what the new dataset looks like and ensure that the data reflects our fictional streaming services streaming analytics data
 
 # In[24]:
