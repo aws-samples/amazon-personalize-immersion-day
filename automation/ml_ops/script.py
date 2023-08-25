@@ -17,7 +17,7 @@ watched_df = watched_df[watched_df['rating'] > 3]
 watched_df = watched_df[['userId', 'movieId', 'timestamp']]
 watched_df['EVENT_TYPE']='watch'
 
-interactions_df = interactions_df.append(watched_df)
+interactions_df = pd.concat([interactions_df, watched_df])
 interactions_df.sort_values("timestamp", axis = 0, ascending = True, inplace = True, na_position ='last')
 interactions_df.rename(columns = {'userId':'USER_ID', 'movieId':'ITEM_ID', 'timestamp':'TIMESTAMP'}, inplace = True)
 interactions_filename = "interactions.csv"

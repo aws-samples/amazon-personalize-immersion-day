@@ -3,36 +3,44 @@
 bucket=$1
 echo "Bucket is $bucket"
 echo "Domain is $2"
-echo "Local copy sync Retail"
-aws s3 cp s3://retail-demo-store-us-east-1/csvs/interactions.csv ./domain/Retail-Pretrained/data/Interactions/interactions.csv
-aws s3 cp s3://retail-demo-store-us-east-1/csvs/users.csv ./domain/Retail-Pretrained/data/Users/users.csv
-aws s3 cp s3://retail-demo-store-us-east-1/csvs/items.csv ./domain/Retail-Pretrained/data/Items/items.csv
-aws s3 cp s3://retail-demo-store-us-east-1/data/products.yaml ./domain/Retail-Pretrained/metadata/Items/products.yaml
-#aws s3 cp s3://retail-demo-store-us-east-1/data/categories.yaml ./domain/Retail-Pretrained/metadata/Items/categories.yaml
-aws s3 cp s3://retail-demo-store-us-east-1/data/users.json.gz ./domain/Retail-Pretrained/metadata/Users/users.json.gz
 
-echo "Local copy sync Media"
+if [ "$2" == "Retail-Pretrained" ]
+then
+    echo "Local copy sync Retail"
+    aws s3 cp s3://retail-demo-store-us-east-1/csvs/interactions.csv ./domain/Retail-Pretrained/data/Interactions/interactions.csv
+    aws s3 cp s3://retail-demo-store-us-east-1/csvs/users.csv ./domain/Retail-Pretrained/data/Users/users.csv
+    aws s3 cp s3://retail-demo-store-us-east-1/csvs/items.csv ./domain/Retail-Pretrained/data/Items/items.csv
+    aws s3 cp s3://retail-demo-store-us-east-1/data/products.yaml ./domain/Retail-Pretrained/metadata/Items/products.yaml
+    #aws s3 cp s3://retail-demo-store-us-east-1/data/categories.yaml ./domain/Retail-Pretrained/metadata/Items/categories.yaml
+    aws s3 cp s3://retail-demo-store-us-east-1/data/users.json.gz ./domain/Retail-Pretrained/metadata/Users/users.json.gz
 
-mkdir poc_data
-mkdir domain/Media/data/
-mkdir domain/Media/data/Interactions/
-mkdir domain/Media/data/Items/
-cd poc_data 
-wget http://files.grouplens.org/datasets/movielens/ml-latest-small.zip
-unzip ml-latest-small.zip
+elif [ "$2" = "Media-Pretrained" ] || [ "$2" = "Media" ]
+then
+    echo "Local copy sync Movielens Data"
 
-echo "Local copy sync Media-Pretrained"
-mkdir imdb
+    mkdir poc_data
+    mkdir domain/Media/data/
+    mkdir domain/Media/data/Interactions/
+    mkdir domain/Media/data/Items/
+    cd poc_data 
+    wget http://files.grouplens.org/datasets/movielens/ml-latest-small.zip
+    unzip ml-latest-small.zip
+fi
+if [ "$2" = "Media-Pretrained" ]
+then
+    echo "Local copy sync IMDB Data"
+    mkdir imdb
 
-echo "IMDB data setup"
-cd ..
-aws s3 cp s3://elementalrodeo99-us-west-1/aim312/items.csv poc_data/imdb/items.csv
-mkdir domain/Media-Pretrained/data/
-mkdir domain/Media-Pretrained/data/Interactions/
-mkdir domain/Media-Pretrained/data/Items/
-mkdir domain/Media-Pretrained/data/Users/
-aws s3 cp s3://elementalrodeo99-us-west-1/aim312/items.csv domain/Media-Pretrained/data/Items/
-aws s3 cp s3://elementalrodeo99-us-west-1/aim312/users.csv domain/Media-Pretrained/data/Users/
+    echo "IMDB data setup"
+    cd ..
+    aws s3 cp s3://elementalrodeo99-us-west-1/aim312/items.csv poc_data/imdb/items.csv
+    mkdir domain/Media-Pretrained/data/
+    mkdir domain/Media-Pretrained/data/Interactions/
+    mkdir domain/Media-Pretrained/data/Items/
+    mkdir domain/Media-Pretrained/data/Users/
+    aws s3 cp s3://elementalrodeo99-us-west-1/aim312/items.csv domain/Media-Pretrained/data/Items/
+    aws s3 cp s3://elementalrodeo99-us-west-1/aim312/users.csv domain/Media-Pretrained/data/Users/
+fi
 
 # Movie Lens data is imported into poc_data for the Media above
 
@@ -43,9 +51,11 @@ then
 
     ipython script-Pretrained.py >script-Pretrained.out 2>&1
     
-else
+elif [ "$2" = "Media" ]
+then
     echo "Preprocess the Movielens data"
     python script.py
+
 fi
 
 sleep 60
