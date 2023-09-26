@@ -60,7 +60,7 @@ On this page you have a few options:
 1. Enter a Stack name to something relevant like `AmazonPersonalizeImmersionDay`.
 1. Change the SageMaker notebook instance name (optional).
 1. Alter the SageMaker notebook EBS volume size, default is 64GB.
-1. Select the industry domain you wish to use for the Immersion Day (Media, Retail, or CPG). Datasets and notebooks for the selected industry will be deployed in the SageMaker notebook instance.
+1. Select the industry domain you wish to use for the Immersion Day (in this case, select 'Retail'). Datasets and notebooks for the selected industry will be deployed in the SageMaker notebook instance.
 
 When you are done click `Next` at the bottom.
 
