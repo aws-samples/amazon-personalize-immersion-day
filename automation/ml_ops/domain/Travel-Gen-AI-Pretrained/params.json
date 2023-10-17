@@ -1,0 +1,167 @@
+{
+    "datasetGroup": {
+      "serviceConfig": {
+        "name": "personalize-poc-travel"
+      }
+    },
+    "datasets": {
+      "interactions": {
+        "dataset": {
+          "serviceConfig": {
+            "name": "workshop_travel_interactions"
+          }
+        },
+        "schema": {
+          "serviceConfig": {
+            "name": "workshop_travel_interactions_schema",
+            "schema": {
+              "type": "record",
+              "name": "Interactions",
+              "namespace": "com.amazonaws.personalize.schema",
+              "fields": [
+                  {
+                      "name": "ITEM_ID",
+                      "type": "string"
+                  },
+                  {
+                      "name": "USER_ID",
+                      "type": "string"
+                  },
+                  {
+                      "name": "TIMESTAMP",
+                      "type": "long"
+                  },
+                  {
+                      "name":"CABIN_TYPE",
+                      "type": "string",
+                      "categorical": true
+                  },
+                  {
+                    "name": "EVENT_TYPE",
+                    "type": "string"
+                  },
+                  {
+                    "name": "EVENT_VALUE",
+                    "type": "float"
+                  }
+              ],
+              "version": "1.0"
+            }
+          }
+        }
+      },
+      "users": {
+        "dataset": {
+          "serviceConfig": {
+            "name": "workshop_travel_users"
+          }
+        },
+        "schema": {
+          "serviceConfig": {
+            "name": "workshop_travel_users_schema",
+            "schema": {
+              "type": "record",
+              "name": "Users",
+              "namespace": "com.amazonaws.personalize.schema",
+              "fields": [
+                  {
+                      "name": "USER_ID",
+                      "type": "string"
+                  },
+                  {
+                      "name": "MEMBER_CLASS",
+                      "type": "string",
+                      "categorical": true
+                  }
+              ],
+              "version": "1.0"
+            }
+          }
+        }
+      },
+      "items": {
+        "dataset": {
+          "serviceConfig": {
+            "name": "workshop_travel_items"
+          }
+        },
+        "schema": {
+          "serviceConfig": {
+            "name": "workshop_travel_items_schema",
+            "schema": {
+              "type": "record",
+              "name": "Items",
+              "namespace": "com.amazonaws.personalize.schema",
+              "fields": [
+                  {
+                      "name": "ITEM_ID",
+                      "type": "string"
+                  },
+                  {
+                      "name": "DST_CITY",
+                      "type": ["null", "string"],
+                      "categorical": true
+                  },
+                  {
+                      "name": "SRC_CITY",
+                      "type": ["null", "string"],
+                      "categorical": true
+                  },
+                  {
+                      "name": "AIRLINE",
+                      "type": ["null", "string"],
+                      "categorical": true
+                  },
+                  {
+                      "name": "DURATION_DAYS",
+                      "type": "int"
+                  },
+                  {
+                      "name": "SEASON",
+                      "type": ["null", "string"],
+                      "categorical": true
+                  },
+                  {
+                      "name": "NUMBER_OF_SEARCH_BY_USER",
+                      "type": "int"
+                  },
+                  {
+                      "name": "PROMOTION",
+                      "type": ["null", "string"],
+                      "categorical": true
+                  },
+                  {
+                      "name": "DYNAMIC_PRICE",
+                      "type": "int"
+                  },
+                  {
+                      "name": "DISCOUNT_FOR_MEMBER",
+                      "type": "float"
+                  },
+                  {
+                      "name": "EXPIRED",
+                      "type": ["null", "string"],
+                      "categorical": true
+                  }
+              ],
+              "version": "1.0"
+            }
+          }
+        }
+      }
+    },
+    "solutions": [
+      {
+        "serviceConfig": {
+
+          "name": "workshop_item_affinity_travel",
+          "recipeArn": "arn:aws:personalize:::recipe/aws-item-affinity"
+        }
+      }
+    ],
+    "dataFiles": {
+      "interactionsFilePath": "s3://personalize-solution-staging-us-east-1/personalize-immersionday-travel/travel_interactions.csv",
+      "itemsFilePath": "s3://personalize-solution-staging-us-east-1/personalize-immersionday-travel/travel_items.csv",
+      "usersFilePath": "s3://personalize-solution-staging-us-east-1/personalize-immersionday-travel/travel_users.csv"
+    }
+  }

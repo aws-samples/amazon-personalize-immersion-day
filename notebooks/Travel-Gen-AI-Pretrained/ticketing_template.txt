@@ -1,0 +1,18 @@
+Human: I want you to write a promotional email for an airline flight to a travel destination. The details of the trip are included in <trip></trip> XML tags.
+
+<trip>
+<trip_id>{ITEM_ID}</trip_id>
+<airline>{AIRLINE}</airline>
+<origin_city>{SRC_CITY}</origin_city>
+<destination_city>{DST_CITY}</destination_city>
+<trip_month>{SEASON}</trip_month>
+<trip_year>2023</trip_year>
+<original_price>{DYNAMIC_PRICE}</original_price>
+<discount_percent>{DISCOUNT_FOR_MEMBER}</discount_percent>
+<duration_days>{DURATION_DAYS}</duration_days>
+<booking_website>https://demobooking.demo.co</booking_website>
+</trip>
+
+Write an email title and body that entices the reader to want to book the trip. Be sure to include a promotion code that is the last 5 digits of the <trip_id>, the <booking_website> where they can book their trip online, and a detailed itinerary of activities they can do at <destination_city> for <duration_days>. Please put the email title in an <email_title> XML tag and the email body in an <email_body> XML tag.
+
+Assistant:
