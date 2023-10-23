@@ -37,12 +37,12 @@
                       "categorical": true
                   },
                   {
-                    "name": "EVENT_TYPE",
-                    "type": "string"
-                  },
-                  {
                     "name": "EVENT_VALUE",
                     "type": "float"
+                  },
+                  {
+                    "name": "EVENT_TYPE",
+                    "type": "string"
                   }
               ],
               "version": "1.0"
@@ -69,7 +69,7 @@
                       "type": "string"
                   },
                   {
-                      "name": "MEMBER_CLASS",
+                      "name": "MEMBER_TIER",
                       "type": "string",
                       "categorical": true
                   }
@@ -117,7 +117,7 @@
                       "type": "int"
                   },
                   {
-                      "name": "SEASON",
+                      "name": "MONTH",
                       "type": ["null", "string"],
                       "categorical": true
                   },

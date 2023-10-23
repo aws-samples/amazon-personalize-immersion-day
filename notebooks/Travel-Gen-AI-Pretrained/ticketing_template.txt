@@ -5,7 +5,7 @@ Human: I want you to write a promotional email for an airline flight to a travel
 <airline>{AIRLINE}</airline>
 <origin_city>{SRC_CITY}</origin_city>
 <destination_city>{DST_CITY}</destination_city>
-<trip_month>{SEASON}</trip_month>
+<trip_month>{MONTH}</trip_month>
 <trip_year>2023</trip_year>
 <original_price>{DYNAMIC_PRICE}</original_price>
 <discount_percent>{DISCOUNT_FOR_MEMBER}</discount_percent>
