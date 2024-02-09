@@ -33,13 +33,13 @@ then
 
     echo "IMDB data setup"
     cd ..
-    aws s3 cp s3://elementalrodeo99-us-west-1/aim312/items.csv poc_data/imdb/items.csv
+    aws s3 cp s3://personalize-solution-staging-us-west-2/personalize-immersionday-media/datasets/items.csv poc_data/imdb/items.csv
     mkdir domain/Media-Pretrained/data/
     mkdir domain/Media-Pretrained/data/Interactions/
     mkdir domain/Media-Pretrained/data/Items/
     mkdir domain/Media-Pretrained/data/Users/
-    aws s3 cp s3://elementalrodeo99-us-west-1/aim312/items.csv domain/Media-Pretrained/data/Items/
-    aws s3 cp s3://elementalrodeo99-us-west-1/aim312/users.csv domain/Media-Pretrained/data/Users/
+    aws s3 cp s3://personalize-solution-staging-us-west-2/personalize-immersionday-media/datasets/items.csv domain/Media-Pretrained/data/Items/
+    aws s3 cp s3://personalize-solution-staging-us-west-2/personalize-immersionday-media/datasets/users.csv domain/Media-Pretrained/data/Users/
 fi
 
 # Movie Lens data is imported into poc_data for the Media above
