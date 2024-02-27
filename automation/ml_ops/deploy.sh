@@ -6,13 +6,14 @@ pip install aws-sam-cli
 sam --version
 sam deploy --template-file template.yaml --stack-name id-ml-ops --capabilities CAPABILITY_IAM --s3-bucket $1
 bucket=$(aws cloudformation describe-stacks --stack-name id-ml-ops --query "Stacks[0].Outputs[?OutputKey=='InputBucketName'].OutputValue" --output text)
+
 echo "Local copy sync Retail"
-aws s3 cp s3://retail-demo-store-us-east-1/csvs/interactions.csv ./domain/Retail/data/Interactions/interactions.csv
-aws s3 cp s3://retail-demo-store-us-east-1/csvs/users.csv ./domain/Retail/data/Users/users.csv
-aws s3 cp s3://retail-demo-store-us-east-1/csvs/items.csv ./domain/Retail/data/Items/items.csv
-aws s3 cp s3://retail-demo-store-us-east-1/data/products.yaml ./domain/Retail/metadata/Items/products.yaml
-aws s3 cp s3://retail-demo-store-us-east-1/data/categories.yaml ./domain/Retail/metadata/Items/categories.yaml
-aws s3 cp s3://retail-demo-store-us-east-1/data/users.json.gz ./domain/Retail/metadata/Users/users.json.gz
+wget -P domain/Retail/data/Interactions https://code.retaildemostore.retail.aws.dev/csvs/interactions.csv
+wget -P domain/Retail/data/Items https://code.retaildemostore.retail.aws.dev/csvs/items.csv
+wget -P domain/Retail/data/Users https://code.retaildemostore.retail.aws.dev/csvs/users.csv
+wget -P domain/Retail/metadata/Items https://code.retaildemostore.retail.aws.dev/data/products.yaml
+wget -P domain/Retail/metadata/Items https://code.retaildemostore.retail.aws.dev/data/categories.yaml
+wget -P domain/Retail/metadata/Users https://code.retaildemostore.retail.aws.dev/data/users.json.gz
 
 echo "Local copy sync CPG"
 aws s3 cp s3://personalization-at-amazon/personalize-immersion-day/CPG/Interactions/interactions.csv ./domain/CPG/data/Interactions/interactions.csv
@@ -26,7 +27,7 @@ mkdir poc_data
 mkdir domain/Media/data/
 mkdir domain/Media/data/Interactions/
 mkdir domain/Media/data/Items/
-cd poc_data 
+cd poc_data
 wget http://files.grouplens.org/datasets/movielens/ml-latest-small.zip
 unzip ml-latest-small.zip
 cd ..
@@ -35,24 +36,24 @@ python script.py
 sleep 60
 
 if [ "$2" == "Retail" ]
-then 
+then
     echo "Starting the copy to S3 Retail data"
-    aws s3 cp s3://retail-demo-store-us-east-1/csvs/users.csv s3://$bucket/Users/users.csv
-    aws s3 cp s3://retail-demo-store-us-east-1/csvs/items.csv s3://$bucket/Items/items.csv
-    aws s3 cp s3://retail-demo-store-us-east-1/csvs/interactions.csv s3://$bucket/Interactions/interactions.csv
-    aws s3 cp ./domain/$2/params.json s3://$bucket 
+    aws s3 cp ./domain/Retail/data/Interactions/interactions.csv s3://$bucket/Interactions/interactions.csv
+    aws s3 cp ./domain/Retail/data/Items/items.csv s3://$bucket/Items/items.csv
+    aws s3 cp ./domain/Retail/data/Users/users.csv s3://$bucket/Users/users.csv
+    aws s3 cp ./domain/Retail/params.json s3://$bucket
 elif [ "$2" = "Media" ]
 then
     echo "Starting the copy to S3 Media data"
     aws s3 cp ./domain/$2/data/Items/item-meta.csv s3://$bucket/Items/items.csv
     aws s3 cp ./domain/$2/data/Interactions/interactions.csv s3://$bucket/Interactions/interactions.csv
-    aws s3 cp ./domain/$2/params.json s3://$bucket 
+    aws s3 cp ./domain/$2/params.json s3://$bucket
 elif [ "$2" = "CPG" ]
 then
     echo "Starting the copy to S3 CPG data"
     aws s3 cp s3://personalization-at-amazon/personalize-immersion-day/CPG/Items/items.csv s3://$bucket/Items/items.csv
     aws s3 cp s3://personalization-at-amazon/personalize-immersion-day/CPG/Interactions/interactions.csv s3://$bucket/Interactions/interactions.csv
     aws s3 cp s3://personalization-at-amazon/personalize-immersion-day/CPG/Users/users.csv s3://$bucket/Users/users.csv
-    aws s3 cp ./domain/$2/params.json s3://$bucket 
+    aws s3 cp ./domain/$2/params.json s3://$bucket
 fi
 
