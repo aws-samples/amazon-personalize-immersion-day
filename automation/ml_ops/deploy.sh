@@ -7,12 +7,12 @@ echo "Domain is $2"
 if [ "$2" == "Retail-Pretrained" ]
 then
     echo "Local copy sync Retail"
-    aws s3 cp s3://retail-demo-store-us-east-1/csvs/interactions.csv ./domain/Retail-Pretrained/data/Interactions/interactions.csv
-    aws s3 cp s3://retail-demo-store-us-east-1/csvs/users.csv ./domain/Retail-Pretrained/data/Users/users.csv
-    aws s3 cp s3://retail-demo-store-us-east-1/csvs/items.csv ./domain/Retail-Pretrained/data/Items/items.csv
-    aws s3 cp s3://retail-demo-store-us-east-1/data/products.yaml ./domain/Retail-Pretrained/metadata/Items/products.yaml
-    #aws s3 cp s3://retail-demo-store-us-east-1/data/categories.yaml ./domain/Retail-Pretrained/metadata/Items/categories.yaml
-    aws s3 cp s3://retail-demo-store-us-east-1/data/users.json.gz ./domain/Retail-Pretrained/metadata/Users/users.json.gz
+    wget -P domain/Retail-Pretrained/data/Interactions https://code.retaildemostore.retail.aws.dev/csvs/interactions.csv
+    wget -P domain/Retail-Pretrained/data/Items https://code.retaildemostore.retail.aws.dev/csvs/items.csv
+    wget -P domain/Retail-Pretrained/data/Users https://code.retaildemostore.retail.aws.dev/csvs/users.csv
+    wget -P domain/Retail-Pretrained/metadata/Items https://code.retaildemostore.retail.aws.dev/data/products.yaml
+    #wget -P domain/Retail-Pretrained/metadata/Items https://code.retaildemostore.retail.aws.dev/data/categories.yaml
+    wget -P domain/Retail-Pretrained/metadata/Users https://code.retaildemostore.retail.aws.dev/data/users.json.gz
 
 elif [ "$2" = "Media-Pretrained" ] || [ "$2" = "Media" ]
 then
@@ -22,7 +22,7 @@ then
     mkdir domain/Media/data/
     mkdir domain/Media/data/Interactions/
     mkdir domain/Media/data/Items/
-    cd poc_data 
+    cd poc_data
     wget http://files.grouplens.org/datasets/movielens/ml-latest-small.zip
     unzip ml-latest-small.zip
 fi
@@ -50,7 +50,7 @@ then
     echo "Preprocess the IMDB and Movielens data"
 
     ipython script-Pretrained.py >script-Pretrained.out 2>&1
-    
+
 elif [ "$2" = "Media" ]
 then
     echo "Preprocess the Movielens data"
@@ -61,25 +61,25 @@ fi
 sleep 60
 
 if [ "$2" == "Retail-Pretrained" ]
-then 
+then
     echo "Starting the copy to S3 Retail data"
-    aws s3 cp s3://retail-demo-store-us-east-1/csvs/users.csv s3://$bucket/train/users.csv
-    aws s3 cp s3://retail-demo-store-us-east-1/csvs/items.csv s3://$bucket/train/items.csv
-    aws s3 cp s3://retail-demo-store-us-east-1/csvs/interactions.csv s3://$bucket/train/interactions.csv
+    aws s3 cp ./domain/$2/data/Interactions/interactions.csv s3://$bucket/train/interactions.csv
+    aws s3 cp ./domain/$2/data/Items/items.csv s3://$bucket/train/items.csv
+    aws s3 cp ./domain/$2/data/Users/users.csv s3://$bucket/train/users.csv
     aws s3 cp ./domain/$2/params.json s3://$bucket/train/params.json
 elif [ "$2" = "Media" ]
 then
     echo "Starting the copy to S3 Media data"
     aws s3 cp ./domain/$2/data/Items/item-meta.csv s3://$bucket/Items/items.csv
     aws s3 cp ./domain/$2/data/Interactions/interactions.csv s3://$bucket/Interactions/interactions.csv
-    aws s3 cp ./domain/$2/params.json s3://$bucket 
+    aws s3 cp ./domain/$2/params.json s3://$bucket
 elif [ "$2" = "CPG" ]
 then
     echo "Starting the copy to S3 CPG data"
     aws s3 cp s3://personalization-at-amazon/personalize-immersion-day/CPG/Items/items.csv s3://$bucket/Items/items.csv
     aws s3 cp s3://personalization-at-amazon/personalize-immersion-day/CPG/Interactions/interactions.csv s3://$bucket/Interactions/interactions.csv
     aws s3 cp s3://personalization-at-amazon/personalize-immersion-day/CPG/Users/users.csv s3://$bucket/Users/users.csv
-    aws s3 cp ./domain/$2/params.json s3://$bucket 
+    aws s3 cp ./domain/$2/params.json s3://$bucket
 elif [ "$2" = "Media-Pretrained" ]
 then
     echo "Starting the copy to S3 Media data"
