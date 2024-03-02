@@ -1,0 +1,380 @@
+---
+AWSTemplateFormatVersion: '2010-09-09'
+
+Description: Creates an S3 Bucket, IAM Policies, and SageMaker Notebook needed for the Amazon Personalize Immersion Day.
+
+Metadata:
+  AWS::CloudFormation::Interface:
+    ParameterGroups:
+      - Label:
+          default: "SageMaker notebook instance"
+        Parameters:
+          - NotebookName
+          - VolumeSize
+      - Label:
+          default: "Industry"
+        Parameters:
+          - domain
+    ParameterLabels:
+      NotebookName:
+        default: "Amazon SageMaker Notebook Name"
+      VolumeSize:
+        default: "Size (in GB) of the Amazon SageMaker Notebook volume"
+      domain:
+        default: "Industry domain"
+
+Parameters:
+  NotebookName:
+    Type: String
+    Default: AmazonPersonalizeImmersionDay
+    Description: Enter the name of the SageMaker notebook instance. Default is AmazonPersonalizeImmersionDay.
+
+  VolumeSize:
+    Type: Number
+    Default: 64
+    MinValue: 5
+    MaxValue: 16384
+    ConstraintDescription: Must be an integer between 5 (GB) and 16384 (16 TB).
+    Description: Enter the size of the SageMaker notebook instance EBS volume in GB.
+
+  domain:
+    Type: String
+    # Default: 'Media'
+    Description: Select the industry domain to use for the Amazon Personalize Immersion Day.
+    AllowedValues:
+      - 'Media'
+      - 'Retail'
+
+
+Resources:
+  # SAMArtifactsBucket:
+  #   Type: AWS::S3::Bucket
+  #       # Tagging Ressources to leverage SSM's Application Manager.
+  #       # ---
+  #   Properties:
+  #     Tags:
+  #       - Key: AppManagerCFNStackKey
+  #         Value: !Ref 'AWS::StackId'
+  
+  MLOpsStack:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://s3.amazonaws.com/solutions-reference/maintaining-personalized-experiences-with-machine-learning/latest/maintaining-personalized-experiences-with-machine-learning.template
+
+
+  # AWS Cloudformation Custom Resource
+  # ---
+  # This custom resource calls AWS Lambda Function "BucketJanitor" before
+  # deleting the bucket as AWS Cloudformation doesn't allow to delete 
+  # non-empty buckets.
+  EmptyS3BucketOnDelete:
+    Type: Custom::janitor
+    Properties:
+      ServiceToken: 
+        Fn::GetAtt: 
+          - "BucketJanitor"
+          - "Arn"
+      BucketName: !GetAtt MLOpsStack.Outputs.PersonalizeBucketName
+    DependsOn: AmazonS3BucketAccessPolicy
+
+    # AWS Lambda function
+  # ---
+  # This function will empty the Amazon S3 Bucket "MLOpsStack.Outputs.PersonalizeBucketName" upon stack 
+  # deletion.
+  BucketJanitor:
+    Type: AWS::Lambda::Function
+    Properties:
+      Code: 
+        ZipFile: 
+          !Sub |
+            #!/usr/bin/env python
+            # -*- coding: utf-8 -*-
+
+            import boto3, logging
+            import cfnresponse
+
+            logger = logging.getLogger()
+            logger.setLevel(logging.INFO)
+
+            def lambda_handler(event, context):
+                logger.info("event: {}".format(event))
+                try:
+                    bucket = event['ResourceProperties']['BucketName']
+                    logger.info("bucket: {}, event['RequestType']: {}".format(bucket,event['RequestType']))
+                    # ---
+                    # We only trigger the janitor if Cloudformation wants to 
+                    # delete the bucket (via a Custom Resource)
+                    # ---
+                    if event['RequestType'] == 'Delete':
+                        s3 = boto3.resource('s3')
+                        # ---
+                        # convert bucket to string
+                        # ---
+                        bucket = str(bucket)
+                        bucket_versioning_status = s3.BucketVersioning(bucket)
+                        bucket = s3.Bucket(bucket)
+                        # ---
+                        # is versioning enabled ?
+                        # ---
+                        if bucket_versioning_status.status == 'Enabled':
+                            print("### Bucket Versioning is enabled")
+                            object_keys = []
+                            # ---
+                            # listing all object versions and adding them to an array.
+                            # ---
+                            for version in bucket.object_versions.all():
+                                if version.object_key not in object_keys:
+                                    object_keys.append(version.object_key)
+                            # ---
+                            # deleting all the object versions in our array.
+                            # ---
+                            for key in object_keys:
+                                print("deleting: " + key)
+                                bucket.object_versions.filter(Prefix=key).delete()
+                        else:
+                            print("### Bucket Versioning is NOT enabled")
+                            # ---
+                            # delete all the objects
+                            # ---
+                            bucket.objects.all().delete()
+                    # ---
+                    # triger sendResponseCfn() to signal back to Cloudformation
+                    # that all went well.
+                    # ---
+                    sendResponseCfn(event, context, cfnresponse.SUCCESS)
+
+                except Exception as e:
+                    # ---
+                    # triger sendResponseCfn() to signal back to Cloudformation
+                    # that something went wrong and point to Cloudwatch Logs.
+                    # ---
+                    logger.info("Exception: {}".format(e))
+                    sendResponseCfn(event, context, cfnresponse.FAILED)
+
+            def sendResponseCfn(event, context, responseStatus):
+                responseData = {}
+                responseData['Data'] = {}
+                cfnresponse.send(event, context, responseStatus, responseData, "CustomResourcePhysicalID")
+
+      Description: This function will empty the Amazon S3 Bucket "MLOpsStack.Outputs.PersonalizeBucketName" upon stack deletion.
+      Handler: "index.lambda_handler"
+      Runtime: python3.8
+      MemorySize: 128
+      Timeout: 60
+      Role: !GetAtt BucketJanitorRole.Arn
+      # Tagging Ressources to leverage SSM's Application Manager.
+      # ---
+      Tags:
+        - Key: AppManagerCFNStackKey
+          Value: !Ref 'AWS::StackId'
+
+  # AWS Lambda Execution Role
+  # ---
+  BucketJanitorRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          -
+            Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      Path: "/"
+      ManagedPolicyArns:
+        - "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+      # Tagging Ressources to leverage SSM's Application Manager.
+      # ---
+      Tags:
+        - Key: AppManagerCFNStackKey
+          Value: !Ref 'AWS::StackId'
+
+
+  # Amazon Personalize Execution Role
+  # ---
+  PersonalizeIamRole:
+    Type: "AWS::IAM::Role"
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          -
+            Effect: Allow
+            Principal:
+              Service: personalize.amazonaws.com
+            Action: sts:AssumeRole
+      Path: "/"
+      ManagedPolicyArns:
+        - "arn:aws:iam::aws:policy/service-role/AmazonPersonalizeFullAccess"
+        - "arn:aws:iam::aws:policy/AmazonSSMReadOnlyAccess"
+      # Tagging Ressources to leverage SSM's Application Manager.
+      # ---
+      Tags:
+        - Key: AppManagerCFNStackKey
+          Value: !Ref 'AWS::StackId'
+
+  # AWS Identity and Access Management - S3 Custom Access Policy
+  # ---
+  # This policy allows Sagemaker and Personalize to perform any actions on the 
+  # S3 bucket created by this template
+  AmazonS3BucketAccessPolicy:
+      Type: AWS::IAM::ManagedPolicy
+      Properties:
+        PolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+            -
+              Effect: Allow
+              Action:
+                - "s3:*"
+              Resource:
+                - !Sub arn:aws:s3:::${MLOpsStack.Outputs.PersonalizeBucketName}
+                - !Sub arn:aws:s3:::${MLOpsStack.Outputs.PersonalizeBucketName}/*
+            -
+              Effect: Allow
+              Action:
+                - "s3:GetObject*"
+              Resource:
+                - !Sub arn:aws:s3:::personalize-solution-staging-us-east-1/personalize-immersionday-media
+                - !Sub arn:aws:s3:::personalize-solution-staging-us-east-1/personalize-immersionday-media/*
+                - !Sub arn:aws:s3:::personalize-solution-staging-us-east-1/personalize-immersionday-media/imdb/*
+            -
+              Effect: Allow
+              Action:
+                - "s3:GetObject*"
+              Resource:
+                - !Sub arn:aws:s3:::retail-demo-store-us-east-1
+                - !Sub arn:aws:s3:::retail-demo-store-us-east-1/*
+            - 
+              Effect: Allow
+              Action:
+                - "bedrock:*"
+              Resource:
+                - "*"
+        Roles: 
+          - !Ref SageMakerIamRole
+          - !Ref PersonalizeIamRole
+          - !Ref BucketJanitorRole
+
+  # Amazon S3 - S3 Bucket Policy
+  # ---
+  # This policy allows Personalize to perform any actions on the 
+  # S3 bucket created by this template
+  PersonalizeBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !GetAtt MLOpsStack.Outputs.PersonalizeBucketName
+      PolicyDocument:
+        Version: '2012-10-17'
+        Id: 'PersonalizeS3BucketAccessPolicy'
+        Statement:
+          - Action:
+              - 's3:GetObject'
+              - 's3:PutObject'
+              - 's3:ListBucket'
+            Effect: Allow
+            Resource:
+              - !Sub arn:aws:s3:::${MLOpsStack.Outputs.PersonalizeBucketName}
+              - !Sub arn:aws:s3:::${MLOpsStack.Outputs.PersonalizeBucketName}/*
+            Principal:
+              Service: personalize.amazonaws.com
+              
+  SageMakerIamRole:
+    Type: "AWS::IAM::Role"
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          -
+            Effect: Allow
+            Principal:
+              Service: sagemaker.amazonaws.com
+            Action: sts:AssumeRole
+      Path: "/"
+      Policies:
+        - PolicyName: !Sub "${AWS::StackName}-sagemaker-s3-poicy"
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Action:
+                  - "s3:*"
+                  - "s3-object-lambda:*"
+                Resource: "*"
+                Effect: Allow
+      ManagedPolicyArns:
+        - "arn:aws:iam::aws:policy/AmazonSageMakerFullAccess"
+        - "arn:aws:iam::aws:policy/service-role/AmazonPersonalizeFullAccess"
+        - "arn:aws:iam::aws:policy/AmazonSSMReadOnlyAccess"
+        - "arn:aws:iam::aws:policy/AWSStepFunctionsFullAccess"
+
+      # Tagging Ressources to leverage SSM's Application Manager.
+      # ---
+      Tags:
+        - Key: AppManagerCFNStackKey
+          Value: !Ref 'AWS::StackId'
+
+  # SageMaker notebook
+  NotebookInstance:
+    Type: "AWS::SageMaker::NotebookInstance"
+    Properties:
+      InstanceType: "ml.t3.medium"
+      NotebookInstanceName: !Ref NotebookName
+      RoleArn: !GetAtt SageMakerIamRole.Arn
+      VolumeSizeInGB: !Ref VolumeSize
+      LifecycleConfigName: !GetAtt AmazonPersonalizeMLOpsLifecycleConfig.NotebookInstanceLifecycleConfigName
+
+  # SSM Parameter with the s3 bucket for personalize
+  # ---
+  PersonalizeS3Bucket:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Name: /cloudformation/personalize-s3-bucket
+      Type: String
+      Value: !GetAtt MLOpsStack.Outputs.PersonalizeBucketName
+      Description: SSM Parameter containing the s3 bucket for Personalize Samples.
+      # Tagging Ressources to leverage SSM's Application Manager.
+      # ---
+      Tags:
+        Key: AppManagerCFNStackKey
+        Value: !Ref 'AWS::StackId'
+
+  # SSM Parameter with the IAM Role for personalize
+  # ---
+  PersonalizeIAMRole:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Name: /cloudformation/personalize-iam-role-arn
+      Type: String
+      Value: !GetAtt PersonalizeIamRole.Arn
+      Description: SSM Parameter containing the iam role arn for Personalize.
+      # Tagging Ressources to leverage SSM's Application Manager.
+      # ---
+      Tags:
+        Key: AppManagerCFNStackKey
+        Value: !Ref 'AWS::StackId'
+
+  AmazonPersonalizeMLOpsLifecycleConfig:
+    # The lifecycle configuration clones the github pository ad runs boostrapping code to deploy assets and pre-train models
+    # it uses the domain as a parameter in the file path to find the right deploy script
+
+    # TODO Change to actual immersion day repo
+    Type: "AWS::SageMaker::NotebookInstanceLifecycleConfig"
+    Properties:
+      OnStart:
+        - Content:
+            Fn::Base64:
+              !Sub |
+                #!/bin/bash
+                sudo -u ec2-user -i <<'EOF'
+                cd /home/ec2-user/SageMaker/
+                git clone --single-branch --branch immersion-day-refactor https://github.com/annainspace/amazon-personalize-immersion-day.git
+                cd /home/ec2-user/SageMaker/amazon-personalize-immersion-day/${domain}/
+                nohup sh ./deploy.sh "${MLOpsStack.Outputs.PersonalizeBucketName}" &
+                EOF
+
+Outputs:
+  MLOpsBucket:
+    Description: The name of the MLOps input bucket
+    Value: !GetAtt MLOpsStack.Outputs.PersonalizeBucketName
+    
