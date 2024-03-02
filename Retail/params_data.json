@@ -1,9 +1,9 @@
 {
   "data_files": {
-    "interactions_file_path": "s3://retail-demo-store-us-east-1/csvs/interactions.csv",
-    "users_file_path": "s3://retail-demo-store-us-east-1/csvs/users.csv",
-    "items_file_path": "s3://retail-demo-store-us-east-1/csvs/items.csv",
-    "user_metadata_file_path": "s3://retail-demo-store-us-east-1/data/users.json.gz",
-    "item_metadata_file_path": "s3://retail-demo-store-us-east-1/data/products.yaml"
+    "interactions_file_path": "https://code.retaildemostore.retail.aws.dev/csvs/interactions.csv",
+    "users_file_path": "https://code.retaildemostore.retail.aws.dev/csvs/users.csv",
+    "items_file_path": "https://code.retaildemostore.retail.aws.dev/csvs/items.csv",
+    "user_metadata_file_path": "https://code.retaildemostore.retail.aws.dev/data/users.json.gz",
+    "item_metadata_file_path": "https://code.retaildemostore.retail.aws.dev/data/products.yaml"
   }
 }
