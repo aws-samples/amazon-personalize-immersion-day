@@ -18,11 +18,10 @@ wget -P poc_data/data https://code.retaildemostore.retail.aws.dev/csvs/users.csv
 sleep 60
 echo "Starting the copy to S3 data"
 
-aws s3 cp ./poc_data/data/users.csv s3://$bucket/train/users.csv
-aws s3 cp ./poc_data/data/interactions.csv s3://$bucket/train/interactions.csv
-aws s3 cp ./poc_data/data/items.csv s3://$bucket/train/items.csv
+aws s3 cp ./poc_data/data/users.csv s3://$bucket/train/retail/users.csv
+aws s3 cp ./poc_data/data/interactions.csv s3://$bucket/train/retail/interactions.csv
+aws s3 cp ./poc_data/data/items.csv s3://$bucket/train/retail/items.csv
 
 sleep 60
 
-aws s3 cp ./params.json s3://$bucket/train/params.json
-
+aws s3 cp ./params.json s3://$bucket/train/retail/params.json

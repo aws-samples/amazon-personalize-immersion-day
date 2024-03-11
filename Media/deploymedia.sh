@@ -16,10 +16,10 @@ ipython ./01_Data_Preparation.py >./01_Data_Preparation.out 2>&1
 sleep 120
 
 echo "Starting the copy to S3 data"
-aws s3 cp ./poc_data/users.csv s3://$bucket/train/users.csv
-aws s3 cp ./poc_data/interactions.csv s3://$bucket/train/interactions.csv
-aws s3 cp ./poc_data/items.csv s3://$bucket/train/items.csv
+aws s3 cp ./poc_data/users.csv s3://$bucket/train/media/users.csv
+aws s3 cp ./poc_data/interactions.csv s3://$bucket/train/media/interactions.csv
+aws s3 cp ./poc_data/items.csv s3://$bucket/train/media/items.csv
 
 sleep 60
 
-aws s3 cp ./params.json s3://$bucket/train/params.json
+aws s3 cp ./params.json s3://$bucket/train/media/params.json

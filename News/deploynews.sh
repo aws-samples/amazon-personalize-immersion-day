@@ -17,6 +17,6 @@ aws s3 cp s3://personalize-solution-staging-us-east-1/personalize-news-immersion
 
 sleep 60
 echo "Starting the copy to S3 News Data"
-aws s3 cp ./poc_data/deskdrop_interactions_automated.csv s3://$bucket/train/interactions.csv
-aws s3 cp ./poc_data/deskdrop_articles_automated.csv s3://$bucket/train/items.csv
-aws s3 cp ./poc_data/params.json s3://$bucket/train/params.json
+aws s3 cp ./poc_data/deskdrop_interactions_automated.csv s3://$bucket/train/news/interactions.csv
+aws s3 cp ./poc_data/deskdrop_articles_automated.csv s3://$bucket/train/news/items.csv
+aws s3 cp ./poc_data/params.json s3://$bucket/train/news/params.json
