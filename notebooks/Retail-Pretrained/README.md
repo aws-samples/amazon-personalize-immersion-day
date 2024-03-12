@@ -43,9 +43,9 @@ As mentioned above, the first step is to deploy a CloudFormation template that w
 
 | Region name | Region code | Launch      |
 | ----------- | ----------- | ----------- |
-| US East (N. Virginia)| us-east-1      |[![Launch Stack](./images/launch-cf-stack.png)](https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/new?stackName=AmazonPersonalizeImmersionDay&templateURL=https://personalize-solution-staging-us-east-1.s3.amazonaws.com/personalize-immersionday-retail/personalizeimmersionday-retail.yaml) |
-| US West (Oregon)   | us-west-2       |[![Launch Stack](./images/launch-cf-stack.png)](https://console.aws.amazon.com/cloudformation/home?region=us-west-2#/stacks/new?stackName=AmazonPersonalizeImmersionDay&templateURL=https://personalize-solution-staging-us-west-2.s3.us-west-2.amazonaws.com/personalize-immersionday-retail/personalizeimmersionday-retail.yaml) |
-| Europe (Ireland)   | eu-west-1       |[![Launch Stack](./images/launch-cf-stack.png)](https://console.aws.amazon.com/cloudformation/home?region=eu-west-1#/stacks/new?stackName=AmazonPersonalizeImmersionDay&templateURL=https://personalize-solution-staging-eu-west-1.s3.eu-west-1.amazonaws.com/personalize-immersionday-retail/personalizeimmersionday-retail.yaml) |
+| US East (N. Virginia)| us-east-1      |[![Launch Stack](./images/launch-cf-stack.png)](https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/new?stackName=AmazonPersonalizeImmersionDay&templateURL=https://d2peeor3oplhc6.cloudfront.net/personalize-immersionday-retail/personalizeimmersionday-retail.yaml) |
+| US West (Oregon)   | us-west-2       |[![Launch Stack](./images/launch-cf-stack.png)](https://console.aws.amazon.com/cloudformation/home?region=us-west-2#/stacks/new?stackName=AmazonPersonalizeImmersionDay&templateURL=https://d2peeor3oplhc6.cloudfront.net/personalize-immersionday-retail/personalizeimmersionday-retail.yaml) |
+| Europe (Ireland)   | eu-west-1       |[![Launch Stack](./images/launch-cf-stack.png)](https://console.aws.amazon.com/cloudformation/home?region=eu-west-1#/stacks/new?stackName=AmazonPersonalizeImmersionDay&templateURL=https://d2peeor3oplhc6.cloudfront.net/personalize-immersionday-retail/personalizeimmersionday-retail.yaml) |
 
 Follow along with the screenshots below if you have any questions about deploying the stack.
 
