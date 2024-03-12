@@ -33,13 +33,14 @@ then
 
     echo "IMDB data setup"
     cd ..
-    aws s3 cp s3://personalize-solution-staging-us-west-2/personalize-immersionday-media/datasets/items.csv poc_data/imdb/items.csv
+    wget -P poc_data/imdb https://d2peeor3oplhc6.cloudfront.net/personalize-immersionday-media/datasets/items.csv
+
     mkdir domain/Media-Pretrained/data/
     mkdir domain/Media-Pretrained/data/Interactions/
     mkdir domain/Media-Pretrained/data/Items/
     mkdir domain/Media-Pretrained/data/Users/
-    aws s3 cp s3://personalize-solution-staging-us-west-2/personalize-immersionday-media/datasets/items.csv domain/Media-Pretrained/data/Items/
-    aws s3 cp s3://personalize-solution-staging-us-west-2/personalize-immersionday-media/datasets/users.csv domain/Media-Pretrained/data/Users/
+    wget -P domain/Media-Pretrained/data/Items https://d2peeor3oplhc6.cloudfront.net/personalize-immersionday-media/datasets/items.csv
+    wget -P domain/Media-Pretrained/data/Users https://d2peeor3oplhc6.cloudfront.net/personalize-immersionday-media/datasets/users.csv
 fi
 
 # Movie Lens data is imported into poc_data for the Media above
