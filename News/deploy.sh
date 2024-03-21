@@ -2,7 +2,6 @@
 
 bucket=$1
 echo "Bucket is $bucket"
-echo "domain is $2"
 
 echo "Local copy sync CI&T Deskdrop News Dataset"
 #copy stuff here
