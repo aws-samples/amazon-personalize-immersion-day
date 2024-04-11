@@ -24,10 +24,11 @@ By the end of this Immersion Day, you should have picked up the following skills
 
 ## Process:
 
-There are currenlty two versions of the Amazon Personalize Immersion Day
+There are currenlty three versions of the Amazon Personalize Immersion Day
 
-1. [Amazon Personalize for Media Immersion Day](Media-Pretrained/README.md) 
-1. [Amazon Personalize for Retail Immersion Day](Retail-Pretrained/README.md)
+1. [Amazon Personalize for Media Immersion Day](./Media-Pretrained/README.md) 
+1. [Amazon Personalize for Retail Immersion Day](./Retail-Pretrained/README.md)
+1. [Amazon Personalize for News Immersion Day](./News-Pretrained/README.md)
 
 Both contain the respective notebooks for:  
 
@@ -58,7 +59,7 @@ TODO: update these links:
 To pre-provision resources and pre-train models, you can deploy the 'pretrained' Amazon CloudFormation template ([PersonalizeIDPretrained.yaml](../PersonalizeIDPretrained.yaml)) or click on the buttons below after logging into your AWS account.
 
 > [!IMPORTANT]  
-> Make sure to specify the right domain for your immersion day, either 'Media' or 'Retail' so the right resources are provisioned.
+> Make sure to specify the right domain for your immersion day, either 'Media', 'Retail' or 'News' so the right resources are provisioned.
 
 TODO: update these links:
 
@@ -85,7 +86,7 @@ If you are running this workshop in your AWS account, you are going to create AW
 
 Finished with the Immersion Day? 
 
-1. If you want to delete the resources created in your AWS account while following along with these notebooks, please see the `04_Clean_Up.ipynb` notebook. It will help you identify all of the Personalize resources deployed in your account and shows you how to delete them.
+1. If you want to delete the resources created in your AWS account while following along with these notebooks, please see the `Clean_Up.ipynb` notebook. It will help you identify all of the Personalize resources deployed in your account and shows you how to delete them.
 
 2. Delete the stack you created with CloudFormation. To do this, in the AWS Console again click the `Services` link at the top, and this time enter in `CloudFormation` and click the link for it. Then Click the `Delete` button on the stack you created.
 

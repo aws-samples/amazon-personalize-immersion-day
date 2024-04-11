@@ -1,4 +1,4 @@
-# Build a custom recommendation engine in 2 hours with Amazon Personalize
+# Build a custom recommendation engine with Amazon Personalize
 
 This workshop will help you get started with the Amazon Personalize basic features in a short time. Please follow the steps in the [Immersion Day ReadMe](../README.md) to set-up your account and evironment, copy relevant data and pre-train models if required.
 
@@ -18,13 +18,15 @@ In this workshop, we will add personalized recommendations to the UnicornFlix SV
 
 [Get to know Amazon Personalize](./00_Introduction_to_Amazon_Personalize.md)
 
-[All you need is Data](./01_Data.ipynb)
+[Data Preperation](./01_Data_Preperation.ipynb)
 
-[Ready... Set... Train!](./02_Training.ipynb)
+[Data Import](./02_Data_Import.ipynb)
 
-[Let's take a look at our recommendations](./03_Inference.ipynb)
+[Ready... Set... Train!](./03_Training.ipynb)
 
-[Customize your recommendations with Business rules](./04_Clean_Up.ipynb)
+[Let's take a look at and customize our recommendations](./04_Inference.ipynb)
+
+[Clean Up Resources](./05_Clean_Up.ipynb)
 
 Go through the sections one-by-one!
 
