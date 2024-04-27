@@ -1,7 +1,7 @@
 {
   "datasetGroup": {
     "serviceConfig": {
-      "name": "personalize-poc-retail",
+      "name": "personalize-immersion-day-retail",
       "domain": "ECOMMERCE"
     }
   },
@@ -18,7 +18,7 @@
           "domain": "ECOMMERCE",
           "schema": {
             "type": "record",
-            "name": "interactions",
+            "name": "retail_interactions",
             "namespace": "com.amazonaws.personalize.schema",
             "fields": [
               {
@@ -59,7 +59,7 @@
           "domain": "ECOMMERCE",
           "schema": {
             "type": "record",
-            "name": "users",
+            "name": "retail_users",
             "namespace": "com.amazonaws.personalize.schema",
             "fields": [
               {
@@ -92,7 +92,7 @@
           "domain": "ECOMMERCE",
           "schema": {
             "type": "record",
-            "name": "items",
+            "name": "retail_items",
             "namespace": "com.amazonaws.personalize.schema",
             "fields": [
               {

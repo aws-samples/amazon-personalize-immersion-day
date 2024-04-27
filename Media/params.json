@@ -1,7 +1,7 @@
 {
   "datasetGroup": {
     "serviceConfig": {
-      "name": "personalize-immersion-day",
+      "name": "personalize-immersion-day-media",
       "domain": "VIDEO_ON_DEMAND"
     }
   },
@@ -18,7 +18,7 @@
           "domain": "VIDEO_ON_DEMAND",
           "schema": {
             "type": "record",
-            "name": "interactions",
+            "name": "media_interactions",
             "namespace": "com.amazonaws.personalize.schema",
             "fields": [
               {
@@ -54,7 +54,7 @@
           "domain": "VIDEO_ON_DEMAND",
           "schema": {
             "type": "record",
-            "name": "users",
+            "name": "media_users",
             "namespace": "com.amazonaws.personalize.schema",
             "fields": [
               {
@@ -83,7 +83,7 @@
           "domain": "VIDEO_ON_DEMAND",
           "schema": {
             "type": "record",
-            "name": "items",
+            "name": "media_items",
             "namespace": "com.amazonaws.personalize.schema",
             "fields": [
               {
