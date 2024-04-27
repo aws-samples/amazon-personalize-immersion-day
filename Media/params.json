@@ -18,7 +18,7 @@
           "domain": "VIDEO_ON_DEMAND",
           "schema": {
             "type": "record",
-            "name": "media_interactions",
+            "name": "interactions",
             "namespace": "com.amazonaws.personalize.schema",
             "fields": [
               {
@@ -54,7 +54,7 @@
           "domain": "VIDEO_ON_DEMAND",
           "schema": {
             "type": "record",
-            "name": "media_users",
+            "name": "users",
             "namespace": "com.amazonaws.personalize.schema",
             "fields": [
               {
@@ -83,7 +83,7 @@
           "domain": "VIDEO_ON_DEMAND",
           "schema": {
             "type": "record",
-            "name": "media_items",
+            "name": "items",
             "namespace": "com.amazonaws.personalize.schema",
             "fields": [
               {
