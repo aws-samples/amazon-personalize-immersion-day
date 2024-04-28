@@ -52,14 +52,13 @@ To pre-provision resources and pre-train models, you can deploy the 'pretrained'
 > [!IMPORTANT]  
 > Make sure to specify the right domain for your immersion day, either 'Media', 'Retail' or 'News' so the right resources are provisioned.
 
-TODO: update these links:
-
 | Region | Region Code | Launch stack | 
 |--------|--------|--------------|
 | US East (N. Virginia) | us-east-1 | [![Launch Stack](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/new?stackName=PersonalizeExample&templateURL=https://personalize-solution-staging-us-east-1.s3.amazonaws.com/personalize-immersionday-template/PersonalizeIDPretrained.yaml) |
 | Europe (Ireland) | eu-west-1 | [![Launch Stack](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home?region=eu-west-1#/stacks/new?stackName=PersonalizeExample&templateURL=https://personalize-solution-staging-eu-west-1.s3.eu-west-1.amazonaws.com/personalize-immersionday-template/PersonalizeIDPretrained.yaml) |
 | Asia Pacific (Sydney) | ap-southeast-2 |[![Launch Stack](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home?region=ap-southeast-2#/stacks/new?stackName=PersonalizeExample&templateURL=https://personalize-solution-staging-ap-southeast-2.s3.ap-southeast-2.amazonaws.com/personalize-immersionday-template/PersonalizeIDPretrained.yaml) |
 
+The cloud formation template used above is also availible in this repo if you wish to run it yourself.
 
 ## Additional Instructions
 
