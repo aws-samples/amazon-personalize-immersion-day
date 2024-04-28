@@ -39,7 +39,7 @@ Parameters:
 
   domain:
     Type: String
-    # Default: 'Media'
+    Default: 'Media'
     Description: Select the industry domain to use for the Amazon Personalize Immersion Day.
     AllowedValues:
       - 'Media'
