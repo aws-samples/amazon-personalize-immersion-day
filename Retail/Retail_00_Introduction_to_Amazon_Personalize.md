@@ -46,7 +46,7 @@ After uploading your data you can use Amazon Personalize to train Use Case Optim
 
 Finally after the recommenders and solutions are trained, you can then get recommendations using an API call and apply filters to further align the recommendations with your business objectives.
 
-The content in this workshop is designed to help you build out your first models for your given use case. Now lets head to the first notebook [Media_01_Data_Layer.ipynb](./Media_01_Data_Layer.ipynb)
+The content in this workshop is designed to help you build out your first models for your given use case. Now lets head to the first notebook [Retail_01_Data_Layer.ipynb](./Retail_01_Data_Layer.ipynb)
 
 ## Additional resources
 

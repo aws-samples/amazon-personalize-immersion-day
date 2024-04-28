@@ -18,13 +18,13 @@ In this workshop, we will add personalized recommendations to the UnicornFlix SV
 
 [Get to know Amazon Personalize](./00_Introduction_to_Amazon_Personalize.md)
 
-[Data Preperation & Import](./01_Data_Layer.ipynb)
+[Data Preperation & Import](./Retail_01_Data_Layer.ipynb)
 
-[Ready... Set... Train!](./02_Training.ipynb)
+[Ready... Set... Train!](./Retail_02_Training.ipynb)
 
-[Let's take a look at and customize our recommendations](./03_Inference.ipynb)
+[Let's take a look at and customize our recommendations](./Retail_03_Inference.ipynb)
 
-[Clean Up Resources](./04_Clean_Up.ipynb)
+[Clean Up Resources](./Retail_04_Clean_Up.ipynb)
 
 Go through the sections one-by-one!
 

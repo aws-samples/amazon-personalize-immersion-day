@@ -43,16 +43,7 @@ Both contain the respective notebooks for:
 
 ## Deploying Your Working Environment
 
-1. Train as you go by executing each cell. Some cells may take a long time to finish executing as they wait for resources to be created. To train as you go for both the Media and the Retail Immersion day you can deploy the 'simple' Amazon CloudFormation template ([PersonalizeIDSimple.yaml](./PersonalizeIDSimple.yaml)) or click on the buttons below after logging into your AWS account.
-
-TODO: update these links:
-
-| Region | Region Code | Launch stack | 
-|--------|--------|--------------|
-| US East (N. Virginia) | us-east-1 | [![Launch Stack](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/new?stackName=PersonalizeExample&templateURL=https://personalize-solution-staging-us-east-1.s3.amazonaws.com/personalize-immersionday-template/PersonalizeIDPretrained.yaml) |
-| Europe (Ireland) | eu-west-1 | [![Launch Stack](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home?region=eu-west-1#/stacks/new?stackName=PersonalizeExample&templateURL=https://personalize-solution-staging-eu-west-1.s3.eu-west-1.amazonaws.com/personalize-samples-genai-marketing-content/personalizeSimpleCFMarketingContentGen.yml) |
-| Asia Pacific (Sydney) | ap-southeast-2 |[![Launch Stack](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home?region=ap-southeast-2#/stacks/new?stackName=PersonalizeExample&templateURL=https://personalize-solution-staging-ap-southeast-2.s3.ap-southeast-2.amazonaws.com/personalize-samples-genai-marketing-content/personalizeSimpleCFMarketingContentGen.yml) |
-
+1. Train as you go by executing each cell. Some cells may take a long time to finish executing as they wait for resources to be created. To do this simply run the notebooks all the way through - you will likely need to give the notebooks appropriate permissions to do this. To learn more about properly permissioning your SageMaker notebooks and account in general to use Amazon Personalize [see here](https://docs.aws.amazon.com/personalize/latest/dg/security-iam.html)
 
 2. Go through notebook with previously created resources. All or the majority of the resources will already be created and cells will just retrieve the information of these existing resources to use them in following steps. 
 
@@ -65,9 +56,9 @@ TODO: update these links:
 
 | Region | Region Code | Launch stack | 
 |--------|--------|--------------|
-| US East (N. Virginia) | us-east-1 | [![Launch Stack](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/new?stackName=PersonalizeExample&templateURL=https://personalize-solution-staging-us-east-1.s3.amazonaws.com/personalize-samples-genai-marketing-content/personalizeSimpleCFMarketingContentGen.yml) |
-| Europe (Ireland) | eu-west-1 | [![Launch Stack](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home?region=eu-west-1#/stacks/new?stackName=PersonalizeExample&templateURL=https://personalize-solution-staging-eu-west-1.s3.eu-west-1.amazonaws.com/personalize-samples-genai-marketing-content/personalizeSimpleCFMarketingContentGen.yml) |
-| Asia Pacific (Sydney) | ap-southeast-2 |[![Launch Stack](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home?region=ap-southeast-2#/stacks/new?stackName=PersonalizeExample&templateURL=https://personalize-solution-staging-ap-southeast-2.s3.ap-southeast-2.amazonaws.com/personalize-samples-genai-marketing-content/personalizeSimpleCFMarketingContentGen.yml) |
+| US East (N. Virginia) | us-east-1 | [![Launch Stack](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/new?stackName=PersonalizeExample&templateURL=https://personalize-solution-staging-us-east-1.s3.amazonaws.com/personalize-immersionday-template/PersonalizeIDPretrained.yaml) |
+| Europe (Ireland) | eu-west-1 | [![Launch Stack](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home?region=eu-west-1#/stacks/new?stackName=PersonalizeExample&templateURL=https://personalize-solution-staging-eu-west-1.s3.eu-west-1.amazonaws.com/personalize-immersionday-template/PersonalizeIDPretrained.yaml) |
+| Asia Pacific (Sydney) | ap-southeast-2 |[![Launch Stack](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home?region=ap-southeast-2#/stacks/new?stackName=PersonalizeExample&templateURL=https://personalize-solution-staging-ap-southeast-2.s3.ap-southeast-2.amazonaws.com/personalize-immersionday-template/PersonalizeIDPretrained.yaml) |
 
 
 ## Additional Instructions
