@@ -28,9 +28,9 @@ There are currenlty three versions of the Amazon Personalize Immersion Day
 
 1. [Amazon Personalize for Media Immersion Day](./Media-Pretrained/README.md) 
 1. [Amazon Personalize for Retail Immersion Day](./Retail-Pretrained/README.md)
-1. [Amazon Personalize for News Immersion Day](./News-Pretrained/README.md)
+1. [Amazon Personalize for News Immersion Day](./News-Pretrained/README.md) (Not Availible ATM)
 
-Both contain the respective notebooks for:  
+All contain the respective notebooks for:  
 
 1. Data -
 `01_Data_Layer.ipynb`

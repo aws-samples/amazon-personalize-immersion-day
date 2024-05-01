@@ -157,7 +157,7 @@ Resources:
 
       Description: This function will empty the Amazon S3 Bucket "MLOpsStack.Outputs.PersonalizeBucketName" upon stack deletion.
       Handler: "index.lambda_handler"
-      Runtime: python3.8
+      Runtime: python3.12
       MemorySize: 128
       Timeout: 60
       Role: !GetAtt BucketJanitorRole.Arn
@@ -231,26 +231,6 @@ Resources:
                 - !Sub arn:aws:s3:::${MLOpsStack.Outputs.PersonalizeBucketName}
                 - !Sub arn:aws:s3:::${MLOpsStack.Outputs.PersonalizeBucketName}/*
             -
-              Effect: Allow
-              Action:
-                - "s3:GetObject*"
-              Resource:
-                - !Sub arn:aws:s3:::personalize-solution-staging-us-east-1/personalize-immersionday-media
-                - !Sub arn:aws:s3:::personalize-solution-staging-us-east-1/personalize-immersionday-media/*
-                - !Sub arn:aws:s3:::personalize-solution-staging-us-east-1/personalize-immersionday-media/imdb/*
-            -
-              Effect: Allow
-              Action:
-                - "s3:GetObject*"
-              Resource:
-                - !Sub arn:aws:s3:::retail-demo-store-us-east-1
-                - !Sub arn:aws:s3:::retail-demo-store-us-east-1/*
-            - 
-              Effect: Allow
-              Action:
-                - "bedrock:*"
-              Resource:
-                - "*"
         Roles: 
           - !Ref SageMakerIamRole
           - !Ref PersonalizeIamRole
