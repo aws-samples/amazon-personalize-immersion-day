@@ -1,0 +1,9 @@
+{
+  "data_files": {
+    "interactions_file_path": "https://code.retaildemostore.retail.aws.dev/csvs/interactions.csv",
+    "users_file_path": "https://code.retaildemostore.retail.aws.dev/csvs/users.csv",
+    "items_file_path": "https://code.retaildemostore.retail.aws.dev/csvs/items.csv",
+    "user_metadata_file_path": "https://code.retaildemostore.retail.aws.dev/data/users.json.gz",
+    "item_metadata_file_path": "https://code.retaildemostore.retail.aws.dev/data/products.yaml"
+  }
+}
