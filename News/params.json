@@ -1,0 +1,145 @@
+{
+  "datasetGroup": {
+    "serviceConfig": {
+      "name": "personalize-immersion-day-news"
+    }
+  },
+  "datasets": {
+    "interactions": {
+      "dataset": {
+        "serviceConfig": {
+          "name": "immersion_day_news_interactions"
+        }
+      },
+      "schema": {
+        "serviceConfig": {
+          "name": "immersion_day_news_interactions_schema",
+          "schema": {
+            "type": "record",
+            "name": "interactions",
+            "namespace": "com.amazonaws.personalize.schema",
+            "fields": [  
+                {  
+                    "name": "USER_ID",  
+                    "type": "string"  
+                },  
+                {  
+                    "name": "ITEM_ID",  
+                    "type": "string"  
+                },  
+                {  
+                    "name": "TIMESTAMP",  
+                    "type": "long"  
+                },
+                {  
+                    "name": "SESSION_ID",  
+                    "type": "string"  
+                },  
+                {  
+                    "name": "EVENT_TYPE",  
+                    "type": "string"  
+                },  
+                {  
+                    "name": "user_device_type",  
+                    "type": [  
+                        "null",  
+                        "string"  
+                    ],  
+                    "categorical": true  
+                }  
+            ]
+          }
+        }
+      }
+    },
+    "items": {
+      "dataset": {
+        "serviceConfig": {
+          "name": "immersion_day_news_items"
+        }
+      },
+      "schema": {
+        "serviceConfig": {
+          "name": "immersion_day_news_items_schema",
+          "schema": {
+            "type": "record",
+            "name": "items",
+            "namespace": "com.amazonaws.personalize.schema",
+            "fields": [
+                {
+                    "name": "ITEM_ID",
+                    "type": "string"
+                },
+                {
+                    "name": "CREATION_TIMESTAMP",
+                    "type": "long"
+                },
+                {
+                    "name": "TRAINING_TEXT",
+                    "type": ["null", "string"],
+                    "textual": true
+                },
+                {
+                    "name": "LANG",
+                    "type": "string",
+                    "categorical": true
+                },
+                {
+                    "name": "ARTICLE_GENRE",
+                    "type": "string",
+                    "categorical": true
+                }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "solutions": [
+    {
+      "serviceConfig": {
+
+        "name": "immersion_day_personalized_ranking_news",
+        "recipeArn": "arn:aws:personalize:::recipe/aws-personalized-ranking"
+      },
+      "campaigns": [
+        {
+          "serviceConfig": {
+
+            "name": "immersion_day_personalized_ranking_news_campaign",
+            "minProvisionedTPS": 1
+          }
+        }
+      ]
+    },
+    {
+      "serviceConfig": {
+
+        "name": "immersion_day_user_personalization_news",
+        "recipeArn": "arn:aws:personalize:::recipe/aws-user-personalization"
+      },
+      "campaigns": [
+        {
+          "serviceConfig": {
+
+            "name": "immersion_day_user_personalization_news_campaign",
+            "minProvisionedTPS": 1
+          }
+        }
+      ]
+    }
+  ],
+   "eventTracker": {
+    "serviceConfig": {
+        "name": "immersion-day-news-event-tracker"
+    }
+  },
+    "filters": [
+        {
+            "serviceConfig": {
+                "name": "immersion-day-news-genre-filter",
+                "filterExpression": "INCLUDE ItemID WHERE Items.ARTICLE_GENRE IN ($GENRELIST) | EXCLUDE ItemID WHERE Interactions.EVENT_TYPE IN (\"VIEW\", \"LIKE\",\"BOOKMARK\",\"COMMENT CREATED\", \"FOLLOW\")"
+            }
+        }
+    ]
+}
