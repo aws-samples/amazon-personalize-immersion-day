@@ -2,3 +2,10 @@
 __pycache__/
 .vscode
 .DS_Store
+.ipynb_checkpoints/
+Media/.ipynb_checkpoints/
+Media/images/.ipynb_checkpoints/
+Media/poc_data/
+News.zip
+Retail/.ipynb_checkpoints/
+Retail/poc_data/
