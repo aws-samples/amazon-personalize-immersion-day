@@ -356,4 +356,3 @@ Outputs:
   MLOpsBucket:
     Description: The name of the MLOps input bucket
     Value: !GetAtt MLOpsStack.Outputs.PersonalizeBucketName
-    
