@@ -50,7 +50,7 @@ All contain the respective notebooks for:
 To pre-provision resources and pre-train models, you can deploy the 'pretrained' Amazon CloudFormation template ([PersonalizeIDPretrained.yaml](../PersonalizeIDPretrained.yaml)) or click on the buttons below after logging into your AWS account.
 
 > [!IMPORTANT]  
-> Make sure to specify the right domain for your immersion day, either 'Media', 'Retail' or 'News' so the right resources are provisioned.
+> Make sure to specify the right domain for your immersion day, either 'Media', 'Retail' or 'News' (News Not Availible ATM) so the right resources are provisioned.
 
 | Region | Region Code | Launch stack | 
 |--------|--------|--------------|
@@ -64,7 +64,7 @@ For additional Instructions please visit our Amazon Personalize Immersion Day [W
 
 ## Regions
 
-This workshop has been tested in the Oregon (us-west-2), North Viginia (us-east-1) and Ireland (eu-west-1) regions.
+This workshop has been tested in the Oregon (eu-west-1), North Viginia (us-east-1) and Ireland (ap-southeast-2) regions.
 
 ## Costs
 
