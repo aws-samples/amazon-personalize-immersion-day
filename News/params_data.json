@@ -1,8 +1,0 @@
-{
-    "data_files": {
-        "interactions_file_path": "https://d2peeor3oplhc6.cloudfront.net/personalize-solution-staging-us-east-1.s3.amazonaws.com/personalize-news-immersion-day/users_interactions.csv",
-        "items_file_path": "https://d2peeor3oplhc6.cloudfront.net/personalize-solution-staging-us-east-1.s3.amazonaws.com/personalize-news-immersion-day/deskdrop_articles_for_immersionday.csv",
-        "interactions_file_path": "https://d2peeor3oplhc6.cloudfront.net/personalize-solution-staging-us-east-1.s3.amazonaws.com/personalize-news-immersion-day/users_interactions.csv",
-        "items_file_path": "https://d2peeor3oplhc6.cloudfront.net/personalize-solution-staging-us-east-1.s3.amazonaws.com/personalize-news-immersion-day/deskdrop_articles_for_immersionday.csv"        
-    }
-}
