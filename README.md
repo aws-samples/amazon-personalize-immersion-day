@@ -26,9 +26,9 @@ By the end of this Immersion Day, you should have picked up the following skills
 
 There are currenlty three versions of the Amazon Personalize Immersion Day
 
-1. [Amazon Personalize for Media Immersion Day](./Media-Pretrained/README.md) 
-1. [Amazon Personalize for Retail Immersion Day](./Retail-Pretrained/README.md)
-1. [Amazon Personalize for News Immersion Day](./News-Pretrained/README.md) (Not Availible ATM)
+1. [Amazon Personalize for Media Immersion Day](./Media/README.md) 
+1. [Amazon Personalize for Retail Immersion Day](./Retail/README.md)
+1. [Amazon Personalize for News and Publishing Immersion Day](./NewsPublishing/README.md) (Not Availible ATM)
 
 All contain the respective notebooks for:  
 
@@ -50,7 +50,7 @@ All contain the respective notebooks for:
 To pre-provision resources and pre-train models, you can deploy the 'pretrained' Amazon CloudFormation template ([PersonalizeIDPretrained.yaml](../PersonalizeIDPretrained.yaml)) or click on the buttons below after logging into your AWS account.
 
 > [!IMPORTANT]  
-> Make sure to specify the right domain for your immersion day, either 'Media', 'Retail' or 'News' (News Not Availible ATM) so the right resources are provisioned.
+> Make sure to specify the right domain for your immersion day, either 'Media', 'Retail' or 'News' (Not Availible ATM) so the right resources are provisioned.
 
 | Region | Region Code | Launch stack | 
 |--------|--------|--------------|
