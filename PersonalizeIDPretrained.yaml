@@ -348,7 +348,7 @@ Resources:
                 #!/bin/bash
                 sudo -u ec2-user -i <<'EOF'
                 cd /home/ec2-user/SageMaker/
-                git clone --single-branch --branch immersion-day-refactor-eric https://github.com/ewbolme/amazon-personalize-immersion-day.git
+                git clone --single-branch --branch news-immersion-day https://github.com/ewbolme/amazon-personalize-immersion-day.git
                 cd /home/ec2-user/SageMaker/amazon-personalize-immersion-day/${domain}/
                 nohup sh ./deploy.sh "${MLOpsStack.Outputs.PersonalizeBucketName}" &
                 EOF
