@@ -44,6 +44,7 @@ Parameters:
     AllowedValues:
       - 'Media'
       - 'Retail'
+      - 'NewsPublishing'
 
 Resources:
   # SAMArtifactsBucket:
