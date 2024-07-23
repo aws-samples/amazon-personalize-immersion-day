@@ -17,4 +17,4 @@ sleep 30
 echo "Starting the copy to S3 News Data"
 aws s3 cp ./poc_data/deskdrop_interactions_automated.csv s3://$bucket/train/news/interactions.csv
 aws s3 cp ./poc_data/deskdrop_articles_automated.csv s3://$bucket/train/news/items.csv
-aws s3 cp ./poc_data/params.json s3://$bucket/train/news/params.json
+aws s3 cp ./params.json s3://$bucket/train/news/params.json
