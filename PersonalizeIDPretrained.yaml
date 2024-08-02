@@ -44,6 +44,7 @@ Parameters:
     AllowedValues:
       - 'Media'
       - 'Retail'
+      - 'NewsPublishing'
 
 Resources:
   # SAMArtifactsBucket:
@@ -223,14 +224,12 @@ Resources:
         PolicyDocument:
           Version: '2012-10-17'
           Statement:
-            -
               Effect: Allow
               Action:
                 - "s3:*"
               Resource:
                 - !Sub arn:aws:s3:::${MLOpsStack.Outputs.PersonalizeBucketName}
                 - !Sub arn:aws:s3:::${MLOpsStack.Outputs.PersonalizeBucketName}/*
-            -
         Roles: 
           - !Ref SageMakerIamRole
           - !Ref PersonalizeIamRole
@@ -347,7 +346,7 @@ Resources:
                 #!/bin/bash
                 sudo -u ec2-user -i <<'EOF'
                 cd /home/ec2-user/SageMaker/
-                git clone --single-branch --branch immersion-day-refactor-eric https://github.com/ewbolme/amazon-personalize-immersion-day.git
+                git clone --single-branch --branch news-immersion-day https://github.com/ewbolme/amazon-personalize-immersion-day.git
                 cd /home/ec2-user/SageMaker/amazon-personalize-immersion-day/${domain}/
                 nohup sh ./deploy.sh "${MLOpsStack.Outputs.PersonalizeBucketName}" &
                 EOF
