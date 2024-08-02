@@ -99,22 +99,6 @@
     {
       "serviceConfig": {
 
-        "name": "immersion_day_personalized_ranking_news",
-        "recipeArn": "arn:aws:personalize:::recipe/aws-personalized-ranking"
-      },
-      "campaigns": [
-        {
-          "serviceConfig": {
-
-            "name": "immersion_day_personalized_ranking_news_campaign",
-            "minProvisionedTPS": 1
-          }
-        }
-      ]
-    },
-    {
-      "serviceConfig": {
-
         "name": "immersion_day_user_personalization_news",
         "recipeArn": "arn:aws:personalize:::recipe/aws-user-personalization"
       },

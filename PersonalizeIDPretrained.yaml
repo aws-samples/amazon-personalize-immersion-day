@@ -224,14 +224,12 @@ Resources:
         PolicyDocument:
           Version: '2012-10-17'
           Statement:
-            -
               Effect: Allow
               Action:
                 - "s3:*"
               Resource:
                 - !Sub arn:aws:s3:::${MLOpsStack.Outputs.PersonalizeBucketName}
                 - !Sub arn:aws:s3:::${MLOpsStack.Outputs.PersonalizeBucketName}/*
-            -
         Roles: 
           - !Ref SageMakerIamRole
           - !Ref PersonalizeIamRole
