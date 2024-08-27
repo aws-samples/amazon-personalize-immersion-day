@@ -285,7 +285,7 @@ Resources:
         - "arn:aws:iam::aws:policy/service-role/AmazonPersonalizeFullAccess"
         - "arn:aws:iam::aws:policy/AmazonSSMReadOnlyAccess"
         - "arn:aws:iam::aws:policy/AWSStepFunctionsFullAccess"
-
+        - "arn:aws:iam::aws:policy/AmazonBedrockFullAccess"
       # Tagging Ressources to leverage SSM's Application Manager.
       # ---
       Tags:
