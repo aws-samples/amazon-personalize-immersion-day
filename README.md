@@ -28,7 +28,8 @@ There are currenlty three versions of the Amazon Personalize Immersion Day
 
 1. [Amazon Personalize for Media Immersion Day](./Media/README.md) 
 1. [Amazon Personalize for Retail Immersion Day](./Retail/README.md)
-1. [Amazon Personalize for News and Publishing Immersion Day](./NewsPublishing/README.md) (Not Availible ATM)
+1. [Amazon Personalize for News and Publishing Immersion Day](./NewsPublishing/README.md)
+1. [Amazon Personalize for Travel&GenAI Immersion Day](./TravelGenAI/README.md) (Not Availible ATM - undergoing testing)
 
 All contain the respective notebooks for:  
 

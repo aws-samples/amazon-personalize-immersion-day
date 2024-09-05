@@ -1,0 +1,5 @@
+{
+    "interactionsFilePath": "s3://personalize-solution-staging-us-east-1/personalize-immersionday-travel/travel_interactions.csv",
+    "itemsFilePath": "s3://personalize-solution-staging-us-east-1/personalize-immersionday-travel/travel_items.csv",
+    "usersFilePath": "s3://personalize-solution-staging-us-east-1/personalize-immersionday-travel/travel_users.csv"
+}
