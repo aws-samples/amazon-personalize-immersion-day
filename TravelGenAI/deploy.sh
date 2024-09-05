@@ -18,4 +18,8 @@ sleep 30
 echo "Starting the copy to S3 to trigger automation process"
 aws s3 cp ./poc_data/travel_interactions.csv s3://$bucket/train/travel/interactions.csv
 aws s3 cp ./poc_data/travel_items.csv s3://$bucket/train/travel/items.csv
-aws s3 cp ./poc_data/travel_users.csv s3://$bucket/train/travel/params.json
+aws s3 cp ./poc_data/travel_users.csv s3://$bucket/train/travel/users.csv
+
+sleep 60
+
+aws s3 cp ./params.json s3://$bucket/train/travel/params.json
