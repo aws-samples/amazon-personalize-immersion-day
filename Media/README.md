@@ -16,7 +16,7 @@ You've been asked by the founders to:
 
 In this workshop, we will add personalized recommendations to the UnicornFlix SVOD website. The workshop is split into the following sections:
 
-[Get to know Amazon Personalize](./00_Introduction_to_Amazon_Personalize.md)
+[Get to know Amazon Personalize](./Media_00_Introduction_to_Amazon_Personalize.md)
 
 [Data Preperation](./Media_01_Data_Preperation.ipynb)
 

@@ -14,15 +14,15 @@ You’ve been asked by the founders to:
 
 In this workshop, we will add personalized recommendations to the UnicornPost SVOD website. The workshop is split into the following sections:
 
-[Get to know Amazon Personalize](./00_Introduction_to_Amazon_Personalize.md)
+[Get to know Amazon Personalize](./News_00_Introduction_to_Amazon_Personalize.md)
 
-[Data Preperation and Import](./01_Data_Layer.ipynb)
+[Data Preperation and Import](./News_01_Data_Layer.ipynb)
 
-[Ready... Set... Train!](./02_Training.ipynb)
+[Ready... Set... Train!](./News_02_Training.ipynb)
 
-[Let's take a look at and customize our recommendations](./03_Inference.ipynb)
+[Let's take a look at and customize our recommendations](./News_03_Inference.ipynb)
 
-[Clean Up Resources](./04_Clean_Up.ipynb)
+[Clean Up Resources](./News_04_Clean_Up.ipynb)
 
 Go through the sections one-by-one!
 
