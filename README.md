@@ -24,12 +24,12 @@ By the end of this Immersion Day, you should have picked up the following skills
 
 ## Process:
 
-There are currenlty three versions of the Amazon Personalize Immersion Day
+There are currenlty four versions of the Amazon Personalize Immersion Day
 
 1. [Amazon Personalize for Media Immersion Day](./Media/README.md) 
 1. [Amazon Personalize for Retail Immersion Day](./Retail/README.md)
 1. [Amazon Personalize for News and Publishing Immersion Day](./NewsPublishing/README.md)
-1. [Amazon Personalize for Travel&GenAI Immersion Day](./TravelGenAI/README.md) (Not Availible ATM - undergoing testing)
+1. [Amazon Personalize for Travel&GenAI Immersion Day](./TravelGenAI/README.md)
 
 All contain the respective notebooks for:  
 
@@ -40,7 +40,9 @@ All contain the respective notebooks for:
 1. Inference -
 `03_Inference_Layer.ipynb`
 1. Clean Up -
-`04_Clean_Up.ipynb`
+`0X_Clean_Up.ipynb`
+
+In addition there is an optional chatbot workshop in the retail immersion day and an optional outbound marketing workshop in the media immersion day. The travel immersion day is entirely focused on an outbound marketing use case.
 
 ## Deploying Your Working Environment
 
@@ -51,7 +53,7 @@ All contain the respective notebooks for:
 To pre-provision resources and pre-train models, you can deploy the 'pretrained' Amazon CloudFormation template ([PersonalizeIDPretrained.yaml](../PersonalizeIDPretrained.yaml)) or click on the buttons below after logging into your AWS account.
 
 > [!IMPORTANT]  
-> Make sure to specify the right domain for your immersion day, either 'Media', 'Retail' or 'News' (Not Availible ATM) so the right resources are provisioned.
+> Make sure to specify the right domain for your immersion day, either 'Media', 'Retail', 'News' or 'TraveGenAI' so the right resources are provisioned.
 
 | Region | Region Code | Launch stack | 
 |--------|--------|--------------|

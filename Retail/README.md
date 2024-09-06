@@ -16,7 +16,7 @@ You’ve been asked by the founders to:
 Throughout the course of this workshop you will be exploring your datasets, building/training several recommendation models and implementing recommendations with API's.
 In this workshop, we will add personalized recommendations to the UnicornFlix SVOD website. The workshop is split into the following sections:
 
-[Get to know Amazon Personalize](./00_Introduction_to_Amazon_Personalize.md)
+[Get to know Amazon Personalize](./Retail_00_Introduction_to_Amazon_Personalize.md)
 
 [Data Preperation & Import](./Retail_01_Data_Layer.ipynb)
 
