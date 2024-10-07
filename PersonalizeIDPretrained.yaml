@@ -39,12 +39,13 @@ Parameters:
 
   domain:
     Type: String
-    Default: 'Media'
+    Default: 'TravelGenAI'
     Description: Select the industry domain to use for the Amazon Personalize Immersion Day.
     AllowedValues:
       - 'Media'
       - 'Retail'
       - 'NewsPublishing'
+      - 'TravelGenAI'
 
 Resources:
   # SAMArtifactsBucket:
@@ -59,7 +60,7 @@ Resources:
   MLOpsStack:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: https://s3.amazonaws.com/solutions-reference/maintaining-personalized-experiences-with-machine-learning/latest/maintaining-personalized-experiences-with-machine-learning.template
+      TemplateURL: https://personalize-solution-staging-us-east-1.s3.amazonaws.com/personalize-mlops-template-fix/maintaining-personalized-experiences-with-machine-learning-eb.template
 
 
   # AWS Cloudformation Custom Resource
@@ -280,12 +281,31 @@ Resources:
                   - "s3-object-lambda:*"
                 Resource: "*"
                 Effect: Allow
+        - PolicyName: !Sub "${AWS::StackName}-bedrock"
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Action:
+                  - "bedrock:InvokeModel"
+                  - "bedrock:InvokeModelWithResponseStream"
+                  - "bedrock:ListFoundationModels"
+                  - "bedrock:InvokeAgent"
+                Resource: "*"
+                Effect: Allow
+        - PolicyName: !Sub "${AWS::StackName}-comprehend"
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Action:
+                  - "comprehend:DetectToxicContent"
+                Resource: "*"
+                Effect: Allow
       ManagedPolicyArns:
         - "arn:aws:iam::aws:policy/AmazonSageMakerFullAccess"
         - "arn:aws:iam::aws:policy/service-role/AmazonPersonalizeFullAccess"
         - "arn:aws:iam::aws:policy/AmazonSSMReadOnlyAccess"
         - "arn:aws:iam::aws:policy/AWSStepFunctionsFullAccess"
-        - "arn:aws:iam::aws:policy/AmazonBedrockFullAccess"
+        - "arn:aws:iam::aws:policy/AmazonRekognitionReadOnlyAccess"
       # Tagging Ressources to leverage SSM's Application Manager.
       # ---
       Tags:
@@ -346,7 +366,7 @@ Resources:
                 #!/bin/bash
                 sudo -u ec2-user -i <<'EOF'
                 cd /home/ec2-user/SageMaker/
-                git clone --single-branch --branch news-immersion-day https://github.com/ewbolme/amazon-personalize-immersion-day.git
+                git clone https://github.com/aws-samples/amazon-personalize-immersion-day.git
                 cd /home/ec2-user/SageMaker/amazon-personalize-immersion-day/${domain}/
                 nohup sh ./deploy.sh "${MLOpsStack.Outputs.PersonalizeBucketName}" &
                 EOF
